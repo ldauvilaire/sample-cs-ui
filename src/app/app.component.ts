@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+
+import * as RouterActions from './core/router.actions';
+import { State } from './app.module';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +10,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+
+  constructor(public store: Store<State>) {}
+
+  public goToHome(): void {
+    this.store.dispatch(new RouterActions.Go({
+      path: ['']
+    }));
+  }
 }
