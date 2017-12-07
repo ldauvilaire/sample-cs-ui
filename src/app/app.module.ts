@@ -1,53 +1,22 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes, Params, RouterStateSnapshot } from '@angular/router';
-import { StoreModule, ActionReducerMap } from '@ngrx/store';
-import {
-  StoreRouterConnectingModule,
-  routerReducer,
-  RouterReducerState,
-  RouterStateSerializer
-} from '@ngrx/router-store';
+import { RouterModule, Routes } from '@angular/router';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { CoreModule } from './core/core.module';
+import { RouterEffects } from './core/router.effects';
+
 import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 
 import { HomeModule } from './home/home.module';
 import { HomeComponent } from './home/home.component';
 
-export interface RouterStateUrl {
-  url: string;
-  params: Params;
-  queryParams: Params;
-}
-
-export interface State {
-  routerReducer: RouterReducerState<RouterStateUrl>;
-}
-
-export class CustomSerializer implements RouterStateSerializer<RouterStateUrl> {
-
-  serialize(routerState: RouterStateSnapshot): RouterStateUrl {
-    let route = routerState.root;
-    while (route.firstChild) {
-      route = route.firstChild;
-    }
-
-    const { url } = routerState;
-    const queryParams = routerState.root.queryParams;
-    const params = route.params;
-
-    // Only return an object including the URL, params and query params
-    // instead of the entire snapshot
-    return { url, params, queryParams };
-  }
-}
-
-export const reducers: ActionReducerMap<State> = {
-  routerReducer: routerReducer
-};
+import { BooksModule } from './books/books.module';
+import { BooksComponent } from './books/books.component';
 
 export const appRoutes: Routes = [
   { path: '',
@@ -57,6 +26,10 @@ export const appRoutes: Routes = [
   { path: 'home',
     component: HomeComponent,
     data: { title: 'Sample CS UI - Home' }
+  },
+  { path: 'books',
+    component: BooksComponent,
+    data: { title: 'Sample CS UI - Books' }
   }
 ];
 
@@ -66,11 +39,12 @@ export const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
-    StoreModule.forRoot(reducers),
+    StoreModule.forRoot({ routerReducer: routerReducer }),
+    EffectsModule.forRoot([ RouterEffects ]),
     RouterModule.forRoot(
       appRoutes,
       { useHash: true,
-        enableTracing: true } // <-- debugging purposes only
+        enableTracing: false } // <-- debugging purposes only
     ),
     StoreRouterConnectingModule,
     // Note that you must instrument after importing StoreModule (config is optional)
@@ -79,7 +53,8 @@ export const appRoutes: Routes = [
     }),
     CoreModule,
     SharedModule,
-    HomeModule
+    HomeModule,
+    BooksModule
   ],
   providers: [],
   bootstrap: [ AppComponent ]

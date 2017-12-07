@@ -14,7 +14,8 @@ export class RouterEffects {
   navigate$ = this.actions$.ofType(RouterActions.GO)
     .map((action: RouterActions.Go) => action.payload)
     .do(({ path, query: queryParams, extras}) =>
-      this.router.navigate(path, { queryParams, ...extras }));
+      this.router.navigate(path, { queryParams, ...extras })
+    );
 
   @Effect({ dispatch: false })
   navigateBack$ = this.actions$.ofType(RouterActions.BACK)
@@ -27,6 +28,7 @@ export class RouterEffects {
   constructor(
     private actions$: Actions,
     private router: Router,
-    private location: Location
-  ) {}
+    private location: Location) {
+  }
+
 }

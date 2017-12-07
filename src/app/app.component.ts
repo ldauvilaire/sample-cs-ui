@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 
+import { RouterState } from './core/router-state-type';
 import * as RouterActions from './core/router.actions';
-import { State } from './app.module';
 
 @Component({
   selector: 'app-root',
@@ -11,11 +11,19 @@ import { State } from './app.module';
 })
 export class AppComponent {
 
-  constructor(public store: Store<State>) {}
+  constructor(public store: Store<RouterState>) {}
 
   public goToHome(): void {
+    console.log('Go To Home');
     this.store.dispatch(new RouterActions.Go({
-      path: ['']
+      path: ['/home']
+    }));
+  }
+
+  public goToBooks(): void {
+    console.log('Go To Books');
+    this.store.dispatch(new RouterActions.Go({
+      path: ['books']
     }));
   }
 }
