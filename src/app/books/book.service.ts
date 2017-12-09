@@ -17,7 +17,7 @@ export class BookService {
   }
 
   getBooks(): Observable<Book[]> {
-    const booksServiceUrl = 'assets/data/books.json';
+    const booksServiceUrl = '/api/data/books.json';
     const headers = new HttpHeaders();
 
     return this.http.get<Book[]>(booksServiceUrl, { headers: headers })
