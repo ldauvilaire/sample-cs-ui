@@ -10,14 +10,19 @@ import { BooksListComponent } from './books-list/books-list.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
 
 import { BookService } from './book.service';
-import { BooksReducer } from './state/books.reducers';
+import { initialBookState } from './state/book-state';
+import { booksReducer } from './state/books.reducers';
 import { BooksEffects } from './state/books-effects';
+
+export function getInitialState() {
+  return {...initialBookState};
+}
 
 @NgModule({
   imports: [
     CoreModule,
     SharedModule,
-    StoreModule.forFeature('books', BooksReducer),
+    StoreModule.forFeature('books', booksReducer, { initialState: getInitialState }),
     EffectsModule.forFeature([ BooksEffects ])
   ],
   declarations: [ BooksComponent, BooksListComponent, BookDetailsComponent ],

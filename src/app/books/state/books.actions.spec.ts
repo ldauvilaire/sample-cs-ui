@@ -12,7 +12,7 @@ describe('The Books actions', () => {
                 ' when getBooksSuccess is called', () => {
 
     const actual = new BookActions.GetAllBooksSuccess(mockBooks);
-    expect(actual.type).toBe(BookActions.GET_ALL_BOOKS_SUCCESS)
+    expect(actual.type).toBe(BookActions.GET_ALL_BOOKS_SUCCESS);
     expect(actual.payload).toBe(mockBooks);
   });
 

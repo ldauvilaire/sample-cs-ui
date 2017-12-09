@@ -1,32 +1,60 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy  } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { createSelector, createFeatureSelector } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 
-import { Book } from './book.model';
+import { NGXLogger } from 'ngx-logger';
+
+import { Book, defaultBook } from './book.model';
 import { BookState } from './state/book-state';
+import * as fromBooksActions from './state/books.actions';
+
+export const selectBookState = createFeatureSelector<BookState>('books');
+export const selectBookList = createSelector(selectBookState, (state: BookState) => state.bookList);
+export const selectSelectedBook = createSelector(selectBookState, (state: BookState) => state.selectedBook);
 
 @Component({
   selector: 'app-books',
   templateUrl: './books.component.html',
   styleUrls: ['./books.component.css']
 })
-export class BooksComponent implements OnInit {
+export class BooksComponent implements OnInit, OnDestroy {
 
-  books: Book[];
-  bookDetails: Book;
+  books$: Observable<Book[]>;
+  bookDetails$: Observable<Book>;
 
-  constructor(private store: Store<BookState>) {
+  constructor(private store: Store<BookState>, private logger: NGXLogger) {
   }
 
   ngOnInit() {
-    this.store.select(state => state)
-      .subscribe((bState) => {
-        this.books = bState.bookList;
-        this.bookDetails = bState.selectedBook;
+    this.logger.info('BooksComponent:', 'ngOnInit()', '...');
+
+    this.books$ = this.store.select<Book[]>(selectBookList)
+      .do((bookList: Book[]) => {
+        this.logger.info(
+          'BooksComponent:',
+          'Received a list of', bookList.length, 'books from the store ...');
+      });
+
+    this.bookDetails$ = this.store.select<Book>(selectSelectedBook)
+      .do((selectedBook: Book) => {
+        if (selectedBook === defaultBook) {
+          this.logger.info('BooksComponent:', 'Received default selected Book from the store ...');
+        } else {
+          this.logger.info('BooksComponent:', 'Received a selected Book with ID', selectedBook.id, 'from the store ...');
+        }
     });
+
+    this.store.dispatch(new fromBooksActions.GetAllBooks());
   }
 
-  // For dump component concept
-  // onBookSelected(event) {
-  //     this.store.dispatch(new GetBookDetails(event.bookId));
-  // }
+  ngOnDestroy() {
+    this.logger.info('BooksComponent:', 'ngOnDestroy()', '...');
+  }
+
+  onBookSelected(event: number) {
+    this.logger.info('BooksComponent:', 'onBookSelected(', event, ')');
+    this.store.dispatch(new fromBooksActions.GetBookDetails(event));
+  }
 }

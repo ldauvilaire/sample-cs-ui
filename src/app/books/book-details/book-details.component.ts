@@ -9,11 +9,11 @@ import { Book } from '../book.model';
 })
 export class BookDetailsComponent implements OnInit {
 
-  data: Book;
+  book: Book;
 
   @Input('selectedBookDetails')
-  set selectedBookDetails(val) {
-    this.data = <Book>val;
+  set selectedBookDetails(value) {
+    this.book = <Book>value;
   }
 
   constructor() { }

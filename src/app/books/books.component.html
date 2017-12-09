@@ -1,13 +1,9 @@
-<p>
-  books works!
-</p>
+<p></p>
 <app-books-list
-  [booksList]="books">
+  [books$]="books$"
+  (bookSelect)="onBookSelected($event)">
 </app-books-list>
-
-<!--For dump component concept-->
-<!--(onBookSelect)="onBookSelected($event)" -->
-
+<p></p>
 <app-book-details
-  [selectedBookDetails]="bookDetails">
+  [selectedBookDetails]="bookDetails$ | async">
 </app-book-details>

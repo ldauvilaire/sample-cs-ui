@@ -1,3 +1,45 @@
-<p>
-  books-list works!
-</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title><mat-icon>book</mat-icon></mat-card-title>
+    <mat-card-subtitle>Books</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-radio-group [(ngModel)]="selectedBookId" (change)="onBookSelected($event)">
+      <mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="selection">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let book">
+            <mat-radio-button [value]="book.id"></mat-radio-button>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+          <mat-cell *matCellDef="let book"> {{book.id}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+          <mat-cell *matCellDef="let book"> {{book.name}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="author">
+          <mat-header-cell *matHeaderCellDef> Author </mat-header-cell>
+          <mat-cell *matCellDef="let book"> {{book.author}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="detail">
+          <mat-header-cell *matHeaderCellDef> Detail </mat-header-cell>
+          <mat-cell *matCellDef="let book"> {{book.detail}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="price">
+          <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
+          <mat-cell *matCellDef="let book"> {{book.price}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="image">
+          <mat-header-cell *matHeaderCellDef> Image </mat-header-cell>
+          <mat-cell *matCellDef="let book"> <img src="assets/{{book.image}}"/> </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </mat-radio-group>
+    <mat-paginator [pageSize]="2" [pageSizeOptions]="[2,3,4,5]"></mat-paginator>
+  </mat-card-content>
+</mat-card>

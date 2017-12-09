@@ -1,0 +1,30 @@
+.mat-column-selection {
+  flex: 0 0 50px;
+}
+.mat-column-id {
+  flex: 0 0 50px;
+}
+.mat-column-name {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.mat-column-author {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.mat-column-detail {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.mat-column-price {
+  flex: 0 0 100px;
+}
+.mat-column-image {
+  flex: 0 0 100px;
+}
+.mat-column-image img {
+  width: 25%;
+}

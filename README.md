@@ -77,6 +77,7 @@ $ npm install @ngrx/store --save
 $ npm install @ngrx/effects --save
 $ npm install @ngrx/store-devtools --save
 $ npm install @ngrx/router-store --save
+$ npm install ngrx-store-freeze --save
 
 ### NgX-Datatable Integration
 
@@ -85,3 +86,7 @@ $ npm install @swimlane/ngx-datatable --save
 ### Moment.js Integration
 
 $ npm install moment --save
+
+### ngx-logger Integration
+
+$ npm install ngx-logger --save

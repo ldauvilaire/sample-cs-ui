@@ -1,37 +1,26 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, RouterStateSnapshot } from '@angular/router';
+
 import { StoreModule } from '@ngrx/store';
+import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
+import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
+
 import { CoreModule } from './core/core.module';
+import { appReducers, appMetaReducers } from './core/app-state';
 import { RouterEffects } from './core/router.effects';
+import { CustomRouterStateSerializer } from './core/router-state';
+
+import { AppComponent } from './app.component';
+import { appRoutes } from './app.routes';
 
 import { SharedModule } from './shared/shared.module';
-import { AppComponent } from './app.component';
 
 import { HomeModule } from './home/home.module';
-import { HomeComponent } from './home/home.component';
-
 import { BooksModule } from './books/books.module';
-import { BooksComponent } from './books/books.component';
-
-export const appRoutes: Routes = [
-  { path: '',
-    redirectTo: '/home',
-    pathMatch: 'full'
-  },
-  { path: 'home',
-    component: HomeComponent,
-    data: { title: 'Sample CS UI - Home' }
-  },
-  { path: 'books',
-    component: BooksComponent,
-    data: { title: 'Sample CS UI - Books' }
-  }
-];
 
 @NgModule({
   declarations: [
@@ -39,7 +28,11 @@ export const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
-    StoreModule.forRoot({ routerReducer: routerReducer }),
+    LoggerModule.forRoot({
+      serverLoggingUrl: '/api/logs',
+      level: NgxLoggerLevel.DEBUG,
+      serverLogLevel: NgxLoggerLevel.OFF }),
+    StoreModule.forRoot(appReducers, { metaReducers: appMetaReducers }),
     EffectsModule.forRoot([ RouterEffects ]),
     RouterModule.forRoot(
       appRoutes,
@@ -56,7 +49,9 @@ export const appRoutes: Routes = [
     HomeModule,
     BooksModule
   ],
-  providers: [],
+  providers: [
+    { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer }
+  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

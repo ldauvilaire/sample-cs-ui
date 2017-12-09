@@ -3,7 +3,7 @@ import { Book } from '../book.model';
 
 import { BookState, initialBookState } from './book-state';
 
-export function BooksReducer(state = initialBookState, action: BooksActions.BooksActions): BookState {
+export function booksReducer(state = initialBookState, action: BooksActions.BooksActions): BookState {
     let newState: BookState;
     switch (action.type) {
         case BooksActions.GET_ALL_BOOKS_SUCCESS:
@@ -18,7 +18,7 @@ export function BooksReducer(state = initialBookState, action: BooksActions.Book
         default:
             return state;
     }
-};
+}
 
 function getBookDetails (bookList: Book[], bookId: number) {
     return bookList.find(book =>

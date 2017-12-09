@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { RouterState } from './core/router-state-type';
+import { NGXLogger } from 'ngx-logger';
+
+import { AppState } from './core/app-state';
 import * as RouterActions from './core/router.actions';
 
 @Component({
@@ -11,17 +13,17 @@ import * as RouterActions from './core/router.actions';
 })
 export class AppComponent {
 
-  constructor(public store: Store<RouterState>) {}
+  constructor(public store: Store<AppState>, private logger: NGXLogger) {}
 
   public goToHome(): void {
-    console.log('Go To Home');
+    this.logger.info('Go To', 'Home');
     this.store.dispatch(new RouterActions.Go({
       path: ['/home']
     }));
   }
 
   public goToBooks(): void {
-    console.log('Go To Books');
+    this.logger.info('Go To', 'Books');
     this.store.dispatch(new RouterActions.Go({
       path: ['books']
     }));
