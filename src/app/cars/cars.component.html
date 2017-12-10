@@ -1,3 +1,11 @@
-<p>
-  cars works!
-</p>
+<p></p>
+<p-message severity="info" text="Made with PrimeNG" closable=false></p-message>
+<p></p>
+<app-cars-list
+  [cars$]="cars$"
+  (carSelect)="onCarSelected($event)">
+</app-cars-list>
+<p></p>
+<app-car-details
+  [selectedCarDetails]="carDetails$ | async">
+</app-car-details>

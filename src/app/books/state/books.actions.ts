@@ -6,7 +6,7 @@ export const GET_ALL_BOOKS = '[Books] Get All';
 export const GET_ALL_BOOKS_SUCCESS = '[Books] Get All Success';
 export const GET_ALL_BOOKS_FAILURE = '[Books] Get All Failure';
 
-export const GET_BOOK_DETAILS = 'GET_BOOK_DETAILS';
+export const GET_BOOK_DETAILS = '[Books] Get Details';
 
 export class GetAllBooks implements Action {
     readonly type = GET_ALL_BOOKS;

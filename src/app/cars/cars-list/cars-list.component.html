@@ -1,3 +1,34 @@
-<p>
-  cars-list works!
-</p>
+<p-panel>
+  <p-header style="display: flex">
+    <i class="material-icons">directions_car</i><span style="margin-top: auto; margin-bottom: auto">Cars</span>
+  </p-header>
+  <p-dataTable [value]="cars$ | async"
+               [rows]="2"
+               [paginator]="true"
+               [rowsPerPageOptions]="[2,3,4,5]">
+      <p-column [style]="{'width':'50px'}">
+          <ng-template let-car="rowData" pTemplate="body">
+              <p-radioButton name="selectedCarGroup"
+                             value="{{car.id}}"
+                             [(ngModel)]="selectedCarId"
+                             (ngModelChange)="onCarSelected($event)">
+              </p-radioButton>
+          </ng-template>
+      </p-column>
+      <p-column field="id" header="ID" [style]="{'width':'50px'}"></p-column>
+      <p-column field="model" header="Model"></p-column>
+      <p-column field="manufacturer" header="Manufacturer"></p-column>
+      <p-column field="price" header="Price"></p-column>
+      <p-column field="wiki" header="Wiki">
+          <ng-template let-car="rowData" pTemplate="body">
+              <a href="{{car.wiki}}">Wiki</a>
+          </ng-template>
+      </p-column>
+      <p-column field="image" header="Image" [style]="{'width':'200px'}">
+          <ng-template let-car="rowData" pTemplate="body">
+              <img src="/api/{{car.image}}" style="width: 25%">
+          </ng-template>
+      </p-column>
+    </p-dataTable>
+</p-panel>
+

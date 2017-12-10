@@ -1,3 +1,47 @@
-<p>
-  car-details works!
-</p>
+<div class="rootContainer" *ngIf="car.id !== -1">
+  <p-panel>
+    <p-header style="display: flex">
+        <i class="material-icons">directions_car</i><span style="margin-top: auto; margin-bottom: auto">Car Details</span>
+    </p-header>
+    <form>
+      <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">ID :</div>
+          <div class="ui-grid-col-10">
+            <input pInputText type="text" placeholder="ID" readOnly="true" [value]="car.id" style="width: 50px">
+          </div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">Model :</div>
+          <div class="ui-grid-col-10">
+            <input pInputText type="text" placeholder="Model" readOnly="true" [value]="car.model" style="width: 150px">
+          </div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">Manufacturer :</div>
+          <div class="ui-grid-col-10">
+            <input pInputText type="text" placeholder="Manufacturer" readOnly="true" [value]="car.manufacturer" style="width: 200px">
+          </div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">Price :</div>
+          <div class="ui-grid-col-10">
+            <input pInputText type="text" placeholder="Price" readOnly="true" [value]="car.price" style="width: 100px">
+          </div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">Wiki :</div>
+          <div class="ui-grid-col-10">
+            <a href="{{car.wiki}}">Wiki</a>
+          </div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">Image :</div>
+          <div class="ui-grid-col-10">
+            <img src="api/{{car.image}}">
+          </div>
+        </div>
+      </div>
+    </form>
+  </p-panel>
+</div>

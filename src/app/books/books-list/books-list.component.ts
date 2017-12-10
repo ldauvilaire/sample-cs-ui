@@ -26,16 +26,15 @@ export class BooksListComponent implements OnInit, OnDestroy, AfterViewInit {
   dataSource: MatTableDataSource<Book>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  // For dump component concept
-  // constructor() { }
-
   constructor(private logger: NGXLogger) {
+    this.logger.info('BooksListComponent:', 'constructor()');
+
     this.dataSource = new MatTableDataSource();
     this.dataSource.paginator = this.paginator;
   }
 
   ngOnInit() {
-    this.logger.info('BooksListComponent:', 'ngOnInit');
+    this.logger.info('BooksListComponent:', 'ngOnInit()');
 
     this.booksSubscription = this.books$.subscribe((data: Book[]) => {
       this.logger.info('BooksListComponent:', 'Received a list of ', data.length, ' books.');
@@ -44,18 +43,17 @@ export class BooksListComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.logger.info('BooksListComponent:', 'ngAfterViewInit');
+    this.logger.info('BooksListComponent:', 'ngAfterViewInit()');
     this.dataSource.paginator = this.paginator;
   }
 
   ngOnDestroy() {
-    this.logger.info('BooksListComponent:', 'ngOnDestroy');
+    this.logger.info('BooksListComponent:', 'ngOnDestroy()');
     this.booksSubscription.unsubscribe();
   }
 
   onBookSelected(event: MatRadioChange) {
-    this.logger.info('BooksListComponent:', 'selectedBookId:', this.selectedBookId);
+    this.logger.info('BooksListComponent:', 'onBookSelected()', 'selectedBookId:', this.selectedBookId);
     this.bookSelect.emit(this.selectedBookId);
   }
 }
-

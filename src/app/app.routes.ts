@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
 import { BooksComponent } from './books/books.component';
+import { CarsComponent } from './cars/cars.component';
 
 export const appRoutes: Routes = [
   { path: '',
@@ -15,5 +16,9 @@ export const appRoutes: Routes = [
   { path: 'books',
     component: BooksComponent,
     data: { title: 'Sample CS UI - Books' }
+  },
+  { path: 'cars',
+    component: CarsComponent,
+    data: { title: 'Sample CS UI - Cars' }
   }
 ];

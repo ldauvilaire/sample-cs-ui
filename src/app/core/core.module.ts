@@ -8,6 +8,7 @@ import { LoggerModule } from 'ngx-logger';
 import {
   MatButtonModule,
   MatCardModule,
+  MatChipsModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
@@ -19,14 +20,27 @@ import {
   MatTooltipModule } from '@angular/material';
 import { CdkTableModule } from '@angular/cdk/table';
 
+import {
+  DataTableModule,
+  FieldsetModule,
+  MessageModule,
+  MessagesModule,
+  PanelModule,
+  RadioButtonModule
+} from 'primeng/primeng';
+import { SharedModule as PrimeSharedModule } from 'primeng/primeng';
+
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     HttpClientModule,
     LoggerModule,
+    /* Angular Material */
     MatButtonModule,
     MatCardModule,
+    MatChipsModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
@@ -36,15 +50,25 @@ import { CdkTableModule } from '@angular/cdk/table';
     MatTableModule,
     MatToolbarModule,
     MatTooltipModule,
-    CdkTableModule
+    CdkTableModule,
+    /* PrimeNG */
+    PrimeSharedModule,
+    DataTableModule,
+    FieldsetModule,
+    MessageModule,
+    MessagesModule,
+    PanelModule,
+    RadioButtonModule
   ],
   exports: [
     CommonModule,
     FormsModule,
     HttpClientModule,
     LoggerModule,
+    /* Angular Material */
     MatButtonModule,
     MatCardModule,
+    MatChipsModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
@@ -54,7 +78,15 @@ import { CdkTableModule } from '@angular/cdk/table';
     MatTableModule,
     MatToolbarModule,
     MatTooltipModule,
-    CdkTableModule
+    CdkTableModule,
+    /* PrimeNG */
+    PrimeSharedModule,
+    DataTableModule,
+    FieldsetModule,
+    MessageModule,
+    MessagesModule,
+    PanelModule,
+    RadioButtonModule
   ],
   declarations: []
 })

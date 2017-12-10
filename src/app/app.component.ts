@@ -28,4 +28,11 @@ export class AppComponent {
       path: ['books']
     }));
   }
+
+  public goToCars(): void {
+    this.logger.info('Go To', 'Cars');
+    this.store.dispatch(new RouterActions.Go({
+      path: ['cars']
+    }));
+  }
 }

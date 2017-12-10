@@ -1,4 +1,3 @@
-///<reference path="../../../node_modules/@angular/common/http/src/headers.d.ts"/>
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
@@ -22,7 +21,7 @@ export class BookService {
 
     return this.http.get<Book[]>(booksServiceUrl, { headers: headers })
       .do(data => {
-        this.logger.info('BookService:', 'Got a list of ', data.length, ' books');
+        this.logger.info('BookService:', 'getBooks()', 'Got a list of ', data.length, ' books');
       });
   }
 }

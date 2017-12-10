@@ -1,7 +1,6 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title><mat-icon>book</mat-icon></mat-card-title>
-    <mat-card-subtitle>Books</mat-card-subtitle>
+    <mat-card-title style="display: flex"><mat-icon>book</mat-icon><span style="margin: auto">Books</span></mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <mat-radio-group [(ngModel)]="selectedBookId" (change)="onBookSelected($event)">
