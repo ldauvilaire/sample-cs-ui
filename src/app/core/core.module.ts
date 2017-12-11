@@ -30,6 +30,7 @@ import {
 } from 'primeng/primeng';
 import { SharedModule as PrimeSharedModule } from 'primeng/primeng';
 
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @NgModule({
   imports: [
@@ -58,7 +59,9 @@ import { SharedModule as PrimeSharedModule } from 'primeng/primeng';
     MessageModule,
     MessagesModule,
     PanelModule,
-    RadioButtonModule
+    RadioButtonModule,
+    /* Ngx Datatable */
+    NgxDatatableModule
   ],
   exports: [
     CommonModule,
@@ -86,7 +89,9 @@ import { SharedModule as PrimeSharedModule } from 'primeng/primeng';
     MessageModule,
     MessagesModule,
     PanelModule,
-    RadioButtonModule
+    RadioButtonModule,
+    /* Ngx Datatable */
+    NgxDatatableModule
   ],
   declarations: []
 })

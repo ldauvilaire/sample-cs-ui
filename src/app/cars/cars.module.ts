@@ -24,7 +24,6 @@ export function getInitialState() {
     SharedModule,
     StoreModule.forFeature('cars', carsReducer, { initialState: getInitialState }),
     EffectsModule.forFeature([ CarsEffects ])
-
   ],
   declarations: [ CarsComponent, CarDetailsComponent, CarsListComponent ],
   providers: [ CarService ]
