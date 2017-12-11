@@ -35,4 +35,11 @@ export class AppComponent {
       path: ['cars']
     }));
   }
+
+  public goToAirports(): void {
+    this.logger.info('Go To', 'Airports');
+    this.store.dispatch(new RouterActions.Go({
+      path: ['airports']
+    }));
+  }
 }

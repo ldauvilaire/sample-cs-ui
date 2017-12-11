@@ -22,6 +22,7 @@ import { SharedModule } from './shared/shared.module';
 import { HomeModule } from './home/home.module';
 import { BooksModule } from './books/books.module';
 import { CarsModule } from './cars/cars.module';
+import { AirportsModule } from './airports/airports.module';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { CarsModule } from './cars/cars.module';
     SharedModule,
     HomeModule,
     BooksModule,
-    CarsModule
+    CarsModule,
+    AirportsModule
   ],
   providers: [
     { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer }

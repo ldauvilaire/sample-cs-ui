@@ -35,3 +35,34 @@ export const mockCars = [
     'image' : 'cars/250px-Nissan_GT-R.jpg'
   }
 ];
+
+export const mockAirports = [
+  {
+    'id': '1',
+    'name': 'Goroka',
+    'city': 'Goroka',
+    'country': 'Papua New Guinea',
+    'iata': 'GKA',
+    'icao': 'AYGA',
+    'latitude': '-6.081689',
+    'longitude': '145.391881',
+    'altitude': '5282',
+    'timezone': '10',
+    'dst': 'U',
+    'tz': 'Pacific/Port_Moresby'
+  },
+  {
+    'id': '2',
+    'name': 'Madang',
+    'city': 'Madang',
+    'country': 'Papua New Guinea',
+    'iata': 'MAG',
+    'icao': 'AYMD',
+    'latitude': '-5.207083',
+    'longitude': '145.7887',
+    'altitude': '20',
+    'timezone': '10',
+    'dst': 'U',
+    'tz': 'Pacific/Port_Moresby'
+  }
+];
