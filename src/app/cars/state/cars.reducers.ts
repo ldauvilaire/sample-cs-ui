@@ -22,5 +22,5 @@ export function carsReducer(state = initialCarState, action: fromCarsActions.Car
 }
 
 function getCarDetails(carList: Car[], carId: number) {
-    return carList.find(car => car.id == carId);
+    return carList.find(car => car.id === carId);
 }

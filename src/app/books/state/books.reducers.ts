@@ -22,5 +22,5 @@ export function booksReducer(state = initialBookState, action: BooksActions.Book
 }
 
 function getBookDetails(bookList: Book[], bookId: number) {
-    return bookList.find(book => book.id == bookId);
+    return bookList.find(book => book.id === bookId);
 }

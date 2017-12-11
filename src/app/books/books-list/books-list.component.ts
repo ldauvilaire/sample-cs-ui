@@ -54,6 +54,6 @@ export class BooksListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   onBookSelected(event: MatRadioChange) {
     this.logger.info('BooksListComponent:', 'onBookSelected()', 'selectedBookId:', this.selectedBookId);
-    this.bookSelect.emit(this.selectedBookId);
+    this.bookSelect.emit(Number(this.selectedBookId));
   }
 }

@@ -43,6 +43,6 @@ export class CarsListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   onCarSelected(event: any) {
     this.logger.info('CarsListComponent:', 'onCarSelected()', 'selectedCarId:', this.selectedCarId);
-    this.carSelect.emit(this.selectedCarId);
+    this.carSelect.emit(Number(this.selectedCarId));
   }
 }
