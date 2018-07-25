@@ -1,8 +1,10 @@
+
+import {of as observableOf} from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/observable/of';
+
 
 import { BookService } from '../book.service';
 import * as actions from './books.actions';
@@ -15,7 +17,7 @@ export class BooksEffects {
     .switchMap(() => this.bookService.getBooks()
       .map(bookList => new actions.GetAllBooksSuccess(bookList)
     ).catch((error) => {
-      return Observable.of(new actions.GetAllBooksFailure(error));
+      return observableOf(new actions.GetAllBooksFailure(error));
     })
   );
 
