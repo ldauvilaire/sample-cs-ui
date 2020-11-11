@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy, AfterViewInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { DataSource, CollectionViewer } from '@angular/cdk/collections';
-import { MatPaginator, MatTableDataSource, MatRadioChange } from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatRadioChange } from '@angular/material/radio';
+import { MatTableDataSource } from '@angular/material/table';
 import { Observable ,  Subscription } from 'rxjs';
 
 import { NGXLogger } from 'ngx-logger';
