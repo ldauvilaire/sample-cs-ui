@@ -1,9 +1,10 @@
 
-import {of as observableOf} from 'rxjs';
+import {catchError, map, switchMap} from 'rxjs/operators';
+
+import {of as observableOf,  Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/switchMap';
+
 
 
 import { CarService } from '../car.service';
@@ -13,13 +14,13 @@ import * as actions from './cars.actions';
 export class CarsEffects {
 
   @Effect() getAllCarsEffects$ = this.actions$
-    .ofType(actions.GET_ALL_CARS)
-    .switchMap(() => this.carService.getCars()
-      .map(CarList => new actions.GetAllCarsSuccess(CarList)
-    ).catch((error) => {
+    .ofType(actions.GET_ALL_CARS).pipe(
+    switchMap(() => this.carService.getCars().pipe(
+      map(CarList => new actions.GetAllCarsSuccess(CarList)
+    ),catchError((error) => {
       return observableOf(new actions.GetAllCarsError(error));
-    })
-  );
+    }),)
+  ));
 
   constructor(
     private actions$: Actions,

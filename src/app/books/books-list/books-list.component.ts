@@ -1,8 +1,7 @@
 import { Component, OnInit, OnDestroy, AfterViewInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { DataSource, CollectionViewer } from '@angular/cdk/collections';
 import { MatPaginator, MatTableDataSource, MatRadioChange } from '@angular/material';
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
+import { Observable ,  Subscription } from 'rxjs';
 
 import { NGXLogger } from 'ngx-logger';
 
@@ -24,7 +23,7 @@ export class BooksListComponent implements OnInit, OnDestroy, AfterViewInit {
   // DataTable component
   displayedColumns = [ 'selection', 'id', 'name', 'author', 'detail', 'price', 'image' ];
   dataSource: MatTableDataSource<Book>;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   constructor(private logger: NGXLogger) {
     this.logger.info('BooksListComponent:', 'constructor()');

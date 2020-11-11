@@ -1,9 +1,11 @@
+
+import {tap} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs';
+
+
+
 
 import { NGXLogger } from 'ngx-logger';
 
@@ -19,9 +21,9 @@ export class BookService {
     const booksServiceUrl = '/api/data/books.json';
     const headers = new HttpHeaders();
 
-    return this.http.get<Book[]>(booksServiceUrl, { headers: headers })
-      .do(data => {
+    return this.http.get<Book[]>(booksServiceUrl, { headers: headers }).pipe(
+      tap(data => {
         this.logger.info('BookService:', 'getBooks()', 'Got a list of ', data.length, ' books');
-      });
+      }));
   }
 }
