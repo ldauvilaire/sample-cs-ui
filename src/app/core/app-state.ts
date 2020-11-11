@@ -15,7 +15,7 @@ import { RouterState } from './router-state';
  * exception will be thrown. This is useful during development mode to
  * ensure that none of the reducers accidentally mutates the state.
  */
-import { storeFreeze } from 'ngrx-store-freeze';
+
 
 /**
  * As mentioned, we treat each reducer like a table in a database. This means
@@ -40,5 +40,5 @@ export const appReducers: ActionReducerMap<AppState> = {
  * that will be composed to form the root meta-reducer.
  */
 export const appMetaReducers: MetaReducer<AppState>[] = !environment.production
-  ? [ storeFreeze ]
+  ? []
   : [];

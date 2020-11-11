@@ -34,14 +34,14 @@ import { AirportsModule } from './airports/airports.module';
       serverLoggingUrl: '/api/logs',
       level: NgxLoggerLevel.DEBUG,
       serverLogLevel: NgxLoggerLevel.OFF }),
-    StoreModule.forRoot(appReducers, { metaReducers: appMetaReducers }),
+    StoreModule.forRoot(appReducers, { metaReducers: appMetaReducers, runtimeChecks: { strictStateImmutability: true, strictActionImmutability: true } }),
     EffectsModule.forRoot([ RouterEffects ]),
     RouterModule.forRoot(
       appRoutes,
       { useHash: true,
         enableTracing: false } // <-- debugging purposes only
     ),
-    StoreRouterConnectingModule,
+    StoreRouterConnectingModule.forRoot(),
     // Note that you must instrument after importing StoreModule (config is optional)
     StoreDevtoolsModule.instrument({
       maxAge: 25 //  Retains last 25 states
