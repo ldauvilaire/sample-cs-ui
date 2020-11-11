@@ -21,13 +21,13 @@ import {
 import { CdkTableModule } from '@angular/cdk/table';
 
 import {
-  DataTableModule,
   FieldsetModule,
   MessageModule,
   MessagesModule,
   PanelModule,
   RadioButtonModule
 } from 'primeng/primeng';
+import { TableModule } from 'primeng/table';
 import { SharedModule as PrimeSharedModule } from 'primeng/primeng';
 
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
@@ -54,7 +54,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     CdkTableModule,
     /* PrimeNG */
     PrimeSharedModule,
-    DataTableModule,
+    TableModule,
     FieldsetModule,
     MessageModule,
     MessagesModule,
@@ -84,7 +84,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     CdkTableModule,
     /* PrimeNG */
     PrimeSharedModule,
-    DataTableModule,
+    TableModule,
     FieldsetModule,
     MessageModule,
     MessagesModule,

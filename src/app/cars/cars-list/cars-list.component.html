@@ -2,10 +2,10 @@
   <p-header style="display: flex">
     <i class="material-icons">directions_car</i><span style="margin-top: auto; margin-bottom: auto">Cars</span>
   </p-header>
-  <p-dataTable [value]="cars$ | async"
-               [rows]="2"
-               [paginator]="true"
-               [rowsPerPageOptions]="[2,3,4,5]">
+  <p-Table [value]="cars$ | async"
+           [rows]="2"
+           [paginator]="true"
+           [rowsPerPageOptions]="[2,3,4,5]">
       <p-column [style]="{'width':'50px'}">
           <ng-template let-car="rowData" pTemplate="body">
               <p-radioButton name="selectedCarGroup"
@@ -29,6 +29,6 @@
               <img src="/api/{{car.image}}" style="width: 25%">
           </ng-template>
       </p-column>
-    </p-dataTable>
+    </p-Table>
 </p-panel>
 
