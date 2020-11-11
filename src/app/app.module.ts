@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes, RouterStateSnapshot } from '@angular/router';
 
 import { StoreModule } from '@ngrx/store';
-import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
+import { StoreRouterConnectingModule, RouterStateSerializer, DefaultRouterStateSerializer } from '@ngrx/router-store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
@@ -41,7 +41,7 @@ import { AirportsModule } from './airports/airports.module';
       { useHash: true,
         enableTracing: false } // <-- debugging purposes only
     ),
-    StoreRouterConnectingModule.forRoot(),
+    StoreRouterConnectingModule.forRoot({ serializer: DefaultRouterStateSerializer }),
     // Note that you must instrument after importing StoreModule (config is optional)
     StoreDevtoolsModule.instrument({
       maxAge: 25 //  Retains last 25 states
