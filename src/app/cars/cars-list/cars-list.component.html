@@ -2,33 +2,42 @@
   <p-header style="display: flex">
     <i class="material-icons">directions_car</i><span style="margin-top: auto; margin-bottom: auto">Cars</span>
   </p-header>
-  <p-Table [value]="cars$ | async"
+  <p-table [value]="cars$ | async"
            [rows]="2"
            [paginator]="true"
            [rowsPerPageOptions]="[2,3,4,5]">
-      <p-column [style]="{'width':'50px'}">
-          <ng-template let-car="rowData" pTemplate="body">
-              <p-radioButton name="selectedCarGroup"
-                             value="{{car.id}}"
-                             [(ngModel)]="selectedCarId"
-                             (ngModelChange)="onCarSelected($event)">
-              </p-radioButton>
-          </ng-template>
-      </p-column>
-      <p-column field="id" header="ID" [style]="{'width':'50px'}"></p-column>
-      <p-column field="model" header="Model"></p-column>
-      <p-column field="manufacturer" header="Manufacturer"></p-column>
-      <p-column field="price" header="Price"></p-column>
-      <p-column field="wiki" header="Wiki">
-          <ng-template let-car="rowData" pTemplate="body">
-              <a href="{{car.wiki}}">Wiki</a>
-          </ng-template>
-      </p-column>
-      <p-column field="image" header="Image" [style]="{'width':'200px'}">
-          <ng-template let-car="rowData" pTemplate="body">
-              <img src="/api/{{car.image}}" style="width: 25%">
-          </ng-template>
-      </p-column>
-    </p-Table>
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Select</th>
+        <th>ID</th>
+        <th>Model</th>
+        <th>Manufacturer</th>
+        <th>Price</th>
+        <th>Wiki</th>
+        <th>Image</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-car="rowData">
+      <tr>
+        <td>
+          <p-radioButton name="selectedCarGroup"
+                         value="{{car.id}}"
+                         [(ngModel)]="selectedCarId"
+                         (ngModelChange)="onCarSelected($event)">
+          </p-radioButton>
+        </td>
+        <td>{{car.id}}</td>
+        <td>{{car.model}}</td>
+        <td>{{car.manufacturer}}</td>
+        <td>{{car.price}}</td>
+        <td>
+          <a href="{{car.wiki}}">Wiki</a>
+        </td>
+        <td>
+          <img src="/api/{{car.image}}" style="width: 25%">
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
 </p-panel>
 
