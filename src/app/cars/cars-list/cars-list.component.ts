@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
-import { LazyLoadEvent } from 'primeng/primeng';
 import { Observable ,  Subscription } from 'rxjs';
 
 import { NGXLogger } from 'ngx-logger';

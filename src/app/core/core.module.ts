@@ -19,15 +19,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CdkTableModule } from '@angular/cdk/table';
 
-import {
-  FieldsetModule,
-  MessageModule,
-  MessagesModule,
-  PanelModule,
-  RadioButtonModule
-} from 'primeng/primeng';
+import { FieldsetModule } from 'primeng/fieldset';
+import { FullCalendarModule } from 'primeng/fullcalendar';
+import { MessageModule } from 'primeng/message';
+import { MessagesModule } from 'primeng/messages';
+import { PanelModule } from 'primeng/panel';
+import { RadioButtonModule } from 'primeng/radiobutton';
 import { TableModule } from 'primeng/table';
-import { SharedModule as PrimeSharedModule } from 'primeng/primeng';
 
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
@@ -52,8 +50,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     MatTooltipModule,
     CdkTableModule,
     /* PrimeNG */
-    PrimeSharedModule,
     TableModule,
+    FullCalendarModule,
     FieldsetModule,
     MessageModule,
     MessagesModule,
@@ -82,8 +80,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     MatTooltipModule,
     CdkTableModule,
     /* PrimeNG */
-    PrimeSharedModule,
     TableModule,
+    FullCalendarModule,
     FieldsetModule,
     MessageModule,
     MessagesModule,

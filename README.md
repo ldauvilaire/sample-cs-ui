@@ -37,10 +37,12 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ### Angular Material Integration
 
+```shell script
 $ npm install --save @angular/material
 $ npm install --save @angular/cdk
 $ npm install --save @angular/animations
 $ npm install --save hammerjs
+```
 
 ```ts
 // in main.ts
@@ -50,7 +52,9 @@ import 'hammerjs';
 
 ### Font Awesome Integration
 
+```shell script
 $ npm install --save font-awesome
+```
 
 ```json
 // in .angular-cli.json
@@ -63,7 +67,9 @@ $ npm install --save font-awesome
 
 ### PrimeNG Integration
 
+```shell script
 $ npm install primeng --save
+```
 
 ```json
 "styles": [
@@ -76,23 +82,31 @@ $ npm install primeng --save
 
 ### NgRX Integration
 
+```shell script
 $ npm install @ngrx/store --save
 $ npm install @ngrx/effects --save
 $ npm install @ngrx/store-devtools --save
 $ npm install @ngrx/router-store --save
 $ npm install ngrx-store-freeze --save
+```
 
 ### NgX-Datatable Integration
 
+```shell script
 $ npm install @swimlane/ngx-datatable --save
+```
 
 ### Moment.js Integration
 
+```shell script
 $ npm install moment --save
+```
 
 ### ngx-logger Integration
 
+```shell script
 $ npm install ngx-logger --save
+```
 
 ### proxy Integration
 
