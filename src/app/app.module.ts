@@ -39,7 +39,9 @@ import { AirportsModule } from './airports/airports.module';
     RouterModule.forRoot(
       appRoutes,
       { useHash: true,
-        enableTracing: false } // <-- debugging purposes only
+        enableTracing: false,
+        relativeLinkResolution: 'corrected'
+      }
     ),
     StoreRouterConnectingModule.forRoot({ serializer: DefaultRouterStateSerializer }),
     // Note that you must instrument after importing StoreModule (config is optional)
