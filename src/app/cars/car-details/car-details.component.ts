@@ -13,7 +13,7 @@ export class CarDetailsComponent implements OnInit {
 
   car: Car;
 
-  @Input('selectedCarDetails')
+  @Input()
   set selectedCarDetails(value) {
     if (value.id === -1) {
       this.logger.info('CarDetailsComponent:', 'selectedCarDetails()', 'Received a empty car details');

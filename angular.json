@@ -56,19 +56,24 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ]
-            }
-          }
+            },
+            "development": {}
+          },
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "sample-cs-ui:build"
           },
           "configurations": {
             "production": {
               "browserTarget": "sample-cs-ui:build:production"
+            },
+            "development": {
+              "browserTarget": "sample-cs-ui:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -118,13 +123,14 @@
           "options": {
             "protractorConfig": "./protractor.conf.js",
             "devServerTarget": "sample-cs-ui:serve"
-          }
+          },
+          "configurations": {}
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "e2e/tsconfig.e2e.json"
+            "lintFilePatterns": [
+              "src/**/*.ts"
             ],
             "exclude": [
               "**/node_modules/**"

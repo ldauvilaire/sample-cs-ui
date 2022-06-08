@@ -13,7 +13,7 @@ export class BookDetailsComponent implements OnInit {
 
   book: Book;
 
-  @Input('selectedBookDetails')
+  @Input()
   set selectedBookDetails(value) {
     if (value.id === -1) {
       this.logger.info('BookDetailsComponent:', 'selectedBookDetails()', 'Received a empty book details');
