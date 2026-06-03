@@ -18,7 +18,7 @@ export class AirportService {
   }
 
   getAirports(): Observable<Airport[]> {
-    const airportsServiceUrl = '/api/data/airports.json';
+    const airportsServiceUrl = '/assets/data/airports.json';
     const headers = new HttpHeaders();
 
     return this.http.get<Airport[]>(airportsServiceUrl, { headers: headers }).pipe(

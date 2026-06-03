@@ -1,17 +1,13 @@
-import * as fromAirportsActions from './airports.actions';
-import { Airport, defaultAirport } from '../airport.model';
+import { createReducer, on } from '@ngrx/store';
 
 import { AirportState, initialAirportState } from './airport-state';
+import * as AirportsActions from './airports.actions';
 
-export function airportsReducer(state = initialAirportState, action: fromAirportsActions.AirportsActions): AirportState {
-    let newState: AirportState;
-    switch (action.type) {
-        case fromAirportsActions.GET_ALL_AIRPORTS_SUCCESS:
-            newState = Object.assign({}, state);
-            newState.airportList = action.payload;
-            newState.isAirportListLoaded = true;
-            return newState;
-        default:
-            return state;
-    }
-}
+export const airportsReducer = createReducer(
+  initialAirportState,
+  on(AirportsActions.getAllAirportsSuccess, (state, { airports }): AirportState => ({
+    ...state,
+    airportList: airports,
+    isAirportListLoaded: true,
+  }))
+);

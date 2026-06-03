@@ -1,8 +1,11 @@
 <p-panel>
-  <p-header style="display: flex">
-    <i class="material-icons">directions_car</i><span style="margin-top: auto; margin-bottom: auto">Cars</span>
-  </p-header>
-  <p-table [value]="cars$ | async"
+  <ng-template #header>
+    <div style="display: flex">
+      <i class="material-icons">directions_car</i>
+      <span style="margin-top: auto; margin-bottom: auto">Cars</span>
+    </div>
+  </ng-template>
+  <p-table [value]="(cars$ | async) ?? []"
            [rows]="2"
            [paginator]="true"
            [rowsPerPageOptions]="[2,3,4,5]">
@@ -34,10 +37,9 @@
           <a href="{{car.wiki}}">Wiki</a>
         </td>
         <td>
-          <img src="/api/{{car.image}}" style="width: 25%">
+          <img src="/assets/{{car.image}}" style="height: 40px; width: auto">
         </td>
       </tr>
     </ng-template>
   </p-table>
 </p-panel>
-

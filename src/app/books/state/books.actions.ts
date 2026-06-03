@@ -1,30 +1,8 @@
-import { Action } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 
 import { Book } from '../book.model';
 
-export const GET_ALL_BOOKS = '[Books] Get All';
-export const GET_ALL_BOOKS_SUCCESS = '[Books] Get All Success';
-export const GET_ALL_BOOKS_FAILURE = '[Books] Get All Failure';
-
-export const GET_BOOK_DETAILS = '[Books] Get Details';
-
-export class GetAllBooks implements Action {
-    readonly type = GET_ALL_BOOKS;
-}
-
-export class GetAllBooksSuccess implements Action {
-    readonly type = GET_ALL_BOOKS_SUCCESS;
-    constructor(public payload: Book[]) { }
-}
-
-export class GetAllBooksFailure implements Action {
-    readonly type = GET_ALL_BOOKS_FAILURE;
-    constructor(public payload: any) { }
-}
-
-export class GetBookDetails implements Action {
-    readonly type = GET_BOOK_DETAILS;
-    constructor(public payload: number) { }
-}
-
-export type BooksActions = GetAllBooks | GetAllBooksSuccess | GetAllBooksFailure | GetBookDetails;
+export const getAllBooks = createAction('[Books] Get All');
+export const getAllBooksSuccess = createAction('[Books] Get All Success', props<{ books: Book[] }>());
+export const getAllBooksFailure = createAction('[Books] Get All Failure', props<{ error: any }>());
+export const getBookDetails = createAction('[Books] Get Details', props<{ bookId: number }>());

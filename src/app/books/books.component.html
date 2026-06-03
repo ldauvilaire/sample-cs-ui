@@ -1,7 +1,7 @@
 <p></p>
-<mat-chip-list>
-    <mat-chip [selected]="true" color="primary">Made with Angular Material</mat-chip>
-</mat-chip-list>
+<mat-chip-listbox>
+    <mat-chip-option [selected]="true" color="primary">Made with Angular Material</mat-chip-option>
+</mat-chip-listbox>
 <p></p>
 <app-books-list
   [books$]="books$"
@@ -9,5 +9,5 @@
 </app-books-list>
 <p></p>
 <app-book-details
-  [selectedBookDetails]="bookDetails$ | async">
+  [selectedBookDetails]="(bookDetails$ | async)!">
 </app-book-details>

@@ -5,7 +5,7 @@ import { BooksComponent } from './books/books.component';
 import { CarsComponent } from './cars/cars.component';
 import { AirportsComponent } from './airports/airports.component';
 
-export const appRoutes: Routes = [
+export const routes: Routes = [
   { path: '',
     redirectTo: '/home',
     pathMatch: 'full'

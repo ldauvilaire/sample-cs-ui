@@ -1,5 +1,10 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
-import { Observable ,  Subscription } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { PanelModule } from 'primeng/panel';
+import { TableModule } from 'primeng/table';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { Observable, Subscription } from 'rxjs';
 
 import { NGXLogger } from 'ngx-logger';
 
@@ -7,16 +12,18 @@ import { Car } from '../car.model';
 
 @Component({
   selector: 'app-cars-list',
+  standalone: true,
+  imports: [CommonModule, FormsModule, PanelModule, TableModule, RadioButtonModule],
   templateUrl: './cars-list.component.html',
   styleUrls: ['./cars-list.component.css']
 })
 export class CarsListComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  @Input() cars$: Observable<Car[]>;
+  @Input() cars$!: Observable<Car[]>;
   @Output() carSelect = new EventEmitter();
-  selectedCarId: number;
+  selectedCarId!: number;
 
-  carsSubscription: Subscription;
+  carsSubscription!: Subscription;
 
   constructor(private logger: NGXLogger) {
     this.logger.info('CarsListComponent:', 'constructor()');
@@ -24,7 +31,6 @@ export class CarsListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit() {
     this.logger.info('CarsListComponent:', 'ngOnInit()');
-
     this.carsSubscription = this.cars$.subscribe((data: Car[]) => {
       this.logger.info('CarsListComponent:', 'Received a list of ', data.length, ' cars.');
     });

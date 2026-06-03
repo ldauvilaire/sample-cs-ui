@@ -1,13 +1,18 @@
 import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
 import { Store } from '@ngrx/store';
 
 import { NGXLogger } from 'ngx-logger';
 
 import { AppState } from './core/app-state';
-import * as RouterActions from './core/router.actions';
+import { go } from './core/router.actions';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet, MatToolbarModule, MatButtonModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -17,29 +22,21 @@ export class AppComponent {
 
   public goToHome(): void {
     this.logger.info('Go To', 'Home');
-    this.store.dispatch(new RouterActions.Go({
-      path: ['/home']
-    }));
+    this.store.dispatch(go({ path: ['/home'] }));
   }
 
   public goToBooks(): void {
     this.logger.info('Go To', 'Books');
-    this.store.dispatch(new RouterActions.Go({
-      path: ['books']
-    }));
+    this.store.dispatch(go({ path: ['books'] }));
   }
 
   public goToCars(): void {
     this.logger.info('Go To', 'Cars');
-    this.store.dispatch(new RouterActions.Go({
-      path: ['cars']
-    }));
+    this.store.dispatch(go({ path: ['cars'] }));
   }
 
   public goToAirports(): void {
     this.logger.info('Go To', 'Airports');
-    this.store.dispatch(new RouterActions.Go({
-      path: ['airports']
-    }));
+    this.store.dispatch(go({ path: ['airports'] }));
   }
 }

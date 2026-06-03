@@ -17,7 +17,7 @@ export class CarService {
   constructor(private http: HttpClient, private logger: NGXLogger) { }
 
   getCars(): Observable<Car[]> {
-    const carsServiceUrl = '/api/data/cars.json';
+    const carsServiceUrl = '/assets/data/cars.json';
     const headers = new HttpHeaders();
 
     return this.http.get<Car[]>(carsServiceUrl, { headers: headers }).pipe(

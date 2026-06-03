@@ -1,6 +1,7 @@
-
-import {tap} from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MessageModule } from 'primeng/message';
 import { Store } from '@ngrx/store';
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -9,7 +10,9 @@ import { NGXLogger } from 'ngx-logger';
 
 import { Car, defaultCar } from './car.model';
 import { CarState } from './state/car-state';
-import * as fromCarsActions from './state/cars.actions';
+import * as CarsActions from './state/cars.actions';
+import { CarsListComponent } from './cars-list/cars-list.component';
+import { CarDetailsComponent } from './car-details/car-details.component';
 
 export const selectCarState = createFeatureSelector<CarState>('cars');
 export const selectCarList = createSelector(selectCarState, (state: CarState) => state.carList);
@@ -17,13 +20,15 @@ export const selectSelectedCar = createSelector(selectCarState, (state: CarState
 
 @Component({
   selector: 'app-cars',
+  standalone: true,
+  imports: [CommonModule, MessageModule, CarsListComponent, CarDetailsComponent],
   templateUrl: './cars.component.html',
   styleUrls: ['./cars.component.css']
 })
 export class CarsComponent implements OnInit, OnDestroy {
 
-  cars$: Observable<Car[]>;
-  carDetails$: Observable<Car>;
+  cars$!: Observable<Car[]>;
+  carDetails$!: Observable<Car>;
 
   constructor(private store: Store<CarState>, private logger: NGXLogger) {
     this.logger.info('CarsComponent:', 'constructor()');
@@ -33,11 +38,9 @@ export class CarsComponent implements OnInit, OnDestroy {
     this.logger.info('CarsComponent:', 'ngOnInit()');
 
     this.cars$ = this.store.select<Car[]>(selectCarList).pipe(
-    tap((carList: Car[]) => {
-      this.logger.info(
-        'CarsComponent:',
-        'Received a list of', carList.length, 'cars from the store ...');
-    }));
+      tap((carList: Car[]) => {
+        this.logger.info('CarsComponent:', 'Received a list of', carList.length, 'cars from the store ...');
+      }));
 
     this.carDetails$ = this.store.select<Car>(selectSelectedCar).pipe(
       tap((selectedCar: Car) => {
@@ -46,9 +49,9 @@ export class CarsComponent implements OnInit, OnDestroy {
         } else {
           this.logger.info('CarsComponent:', 'Received a selected Car with ID', selectedCar.id, 'from the store ...');
         }
-    }));
+      }));
 
-    this.store.dispatch(new fromCarsActions.GetAllCars());
+    this.store.dispatch(CarsActions.getAllCars());
   }
 
   ngOnDestroy() {
@@ -57,6 +60,6 @@ export class CarsComponent implements OnInit, OnDestroy {
 
   onCarSelected(event: number) {
     this.logger.info('CarsComponent:', 'onCarSelected(' + event + ')');
-    this.store.dispatch(new fromCarsActions.GetCarDetails(event));
+    this.store.dispatch(CarsActions.getCarDetails({ carId: event }));
   }
 }
