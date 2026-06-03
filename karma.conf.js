@@ -25,13 +25,21 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage'),
+      dir: require('path').join(__dirname, './coverage/sample-cs-ui'),
       subdir: '.',
       reporters: [
         { type: 'html' },
         { type: 'text-summary' },
         { type: 'lcovonly' }
-      ]
+      ],
+      check: {
+        global: {
+          statements: 70,
+          branches: 70,
+          functions: 70,
+          lines: 70
+        }
+      }
     },
     reporters: ['progress', 'kjhtml', 'coverage'],
     port: 9876,
@@ -44,7 +52,7 @@ module.exports = function (config) {
     customLaunchers: {
       ChromeHeadlessCI: {
         base: 'ChromeHeadless',
-        flags: ['--no-sandbox']
+        flags: ['--no-sandbox', '--disable-gpu']
       }
     }
   });
