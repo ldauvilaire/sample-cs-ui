@@ -1,115 +1,116 @@
 # sample-cs-ui
 
-Sample Angular Project with Style Guide and NgRx and Material
+A sample Angular application demonstrating how to integrate a modern Angular stack — NgRx for state management, Angular Material and PrimeNG for UI components, and ngx-datatable for large data grids — in a single cohesive project.
 
----
+## Stack
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.5.
+| Layer | Technology |
+|---|---|
+| Framework | [Angular 18](https://angular.dev) (standalone components) |
+| State management | [NgRx 18](https://ngrx.io) — Store, Effects, Router Store, Devtools |
+| UI components | [Angular Material 18](https://material.angular.io) + [PrimeNG 18](https://primeng.org) |
+| Data grid | [@swimlane/ngx-datatable 20](https://swimlane.github.io/ngx-datatable/) |
+| Logging | [ngx-logger 5](https://github.com/dbfannin/ngx-logger) |
+| Node.js | 24.x |
 
-## Development server
+## Screenshots
 
-Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### Home
+![Home page](src/assets/screenshots/screenshot-home.png)
 
-Backend is accesses with prefix `/api`.
-You can alse Run `ng serve --proxy-config proxy.conf.json`
+### Books — Angular Material paginated table
+![Books page](src/assets/screenshots/screenshot-books.png)
 
-## Code scaffolding
+### Cars — PrimeNG paginated table
+![Cars page](src/assets/screenshots/screenshot-cars.png)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Airports — ngx-datatable data grid
+![Airports page](src/assets/screenshots/screenshot-airports.png)
 
-## Build
+## Features
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+The app has four pages, each demonstrating a different UI approach backed by the same NgRx pattern (action → effect → reducer → selector):
 
-## Running unit tests
+| Page | UI library | What it shows |
+|---|---|---|
+| **Home** | Angular Material | Landing page with a Material card |
+| **Books** | Angular Material | Paginated table (`mat-table`) with row selection via radio buttons |
+| **Cars** | PrimeNG | Paginated table (`p-table`) and detail form (`p-panel`, `pInputText`) |
+| **Airports** | ngx-datatable | High-performance data grid with sortable columns (8 107 rows) |
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Navigation is handled through the NgRx router store: toolbar buttons dispatch `[Router] Go` actions rather than calling the Angular router directly.
 
-## Running end-to-end tests
+## Project structure
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-
----
-
-### Angular Material Integration
-
-```shell script
-$ npm install --save @angular/material
-$ npm install --save @angular/cdk
-$ npm install --save @angular/animations
-$ npm install --save hammerjs
+```
+src/app/
+├── core/           # App-wide state: router actions, effects, custom router serializer
+├── shared/         # Shared Angular module (currently thin, kept for extension)
+├── home/           # Home page component
+├── books/          # Books feature: component, list, details, NgRx state
+│   └── state/      # actions, reducer, effects, state interface
+├── cars/           # Cars feature: same structure as books
+│   └── state/
+├── airports/       # Airports feature: same structure, uses ngx-datatable
+│   └── state/
+└── testing/        # Shared mock data used in unit tests
 ```
 
-```ts
-// in main.ts
+## Prerequisites
 
-import 'hammerjs';
+- Node.js 24.x
+- npm 10.x
+
+## Getting started
+
+```bash
+npm install
+npm start
 ```
 
-### Font Awesome Integration
+The app runs at `http://localhost:4200`.
 
-```shell script
-$ npm install --save font-awesome
+## Available scripts
+
+| Command | Description |
+|---|---|
+| `npm start` | Dev server on port 4200 |
+| `npm run build` | Production build into `dist/` |
+| `npm run build:prod` | Alias for production build |
+| `npm test` | Unit tests via Karma + Jasmine (watch mode) |
+| `npm run test:ci` | Unit tests with coverage, headless Chrome, single run |
+| `npm run lint` | ESLint over `src/**/*.ts` and `src/**/*.html` |
+| `npm run lint:fix` | ESLint with auto-fix |
+
+## State management
+
+Each feature follows the same NgRx pattern:
+
+```
+Component  →  dispatch(action)
+              ↓
+           Effect  →  HTTP call  →  dispatch(successAction)
+              ↓
+           Reducer  →  new state
+              ↓
+           Selector  ←  Component subscribes
 ```
 
-```json
-// in .angular-cli.json
+The router is also managed through the store via `@ngrx/router-store`. Navigation actions (`Go`, `Back`, `Forward`) are defined in `src/app/core/router.actions.ts` and handled by `RouterEffects`.
 
-"styles": [
-  "styles.css",
-  "../node_modules/font-awesome/css/font-awesome.min.css"
-]
+## Backend
+
+There is no real backend. The services fetch JSON fixture files directly from `src/assets/data/` (`books.json`, `cars.json`, `airports.json`). To connect a real backend, update the URLs in `book.service.ts`, `car.service.ts`, and `airport.service.ts`.
+
+## PrimeNG theming
+
+PrimeNG 18 uses a programmatic theme system. The theme is configured in `src/main.ts` via `providePrimeNG()` with the `Aura` preset from `@primeng/themes`. To switch theme, replace `Aura` with another preset (`Lara`, `Nora`, `Material`) from the same package.
+
+## Running tests
+
+```bash
+npm test          # interactive, browser opens automatically
+npm run test:ci   # headless, outputs coverage to coverage/
 ```
 
-### PrimeNG Integration
-
-```shell script
-$ npm install primeng --save
-```
-
-```json
-"styles": [
-  "styles.css",
-  "../node_modules/font-awesome/css/font-awesome.min.css",
-  "../node_modules/primeng/resources/themes/omega/theme.css",
-  "../node_modules/primeng/resources/primeng.min.css"
-]
-```
-
-### NgRX Integration
-
-```shell script
-$ npm install @ngrx/store --save
-$ npm install @ngrx/effects --save
-$ npm install @ngrx/store-devtools --save
-$ npm install @ngrx/router-store --save
-```
-
-### NgX-Datatable Integration
-
-```shell script
-$ npm install @swimlane/ngx-datatable --save
-```
-
-### Moment.js Integration
-
-```shell script
-$ npm install moment --save
-```
-
-### ngx-logger Integration
-
-```shell script
-$ npm install ngx-logger --save
-```
-
-### proxy Integration
-
-Backend is accesses with prefix /api.
-To serve the application,
-   just run ````npm start````
-   or ```ng serve --proxy-config proxy.conf.json```
+Tests use Karma with ChromeHeadless. Mock data shared across tests lives in `src/app/testing/mockdata.ts`.
