@@ -1,5 +1,6 @@
 .mat-column-selection {
-  flex: 0 0 50px;
+  flex: 0 0 64px;
+  padding-left: 4px;
 }
 .mat-column-id {
   flex: 0 0 50px;
@@ -24,8 +25,9 @@
   flex: 0 0 100px;
 }
 .mat-column-image {
-  flex: 0 0 100px;
+  flex: 0 0 80px;
 }
 .mat-column-image img {
-  width: 25%;
+  height: 40px;
+  width: auto;
 }

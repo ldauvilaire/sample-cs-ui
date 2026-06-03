@@ -21,7 +21,7 @@
             <input matInput placeholder="Price" readonly [value]="book.price" />
         </mat-form-field>
         <div>
-            <input placeholder="Image" id="bookImage" type="image" src="/api/{{book.image}}"/>
+            <img id="bookImage" alt="Book cover" src="/assets/{{book.image}}" style="max-height: 120px"/>
         </div>
       </form>
     </mat-card-content>
