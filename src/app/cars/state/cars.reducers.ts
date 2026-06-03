@@ -14,7 +14,7 @@ export function carsReducer(state = initialCarState, action: fromCarsActions.Car
             return newState;
         case fromCarsActions.GET_CAR_DETAILS:
             newState = Object.assign({}, state);
-            newState.selectedCar = getCarDetails(state.carList, action.payload);
+            newState.selectedCar = getCarDetails(state.carList, action.payload)!;
             return newState;
         default:
             return state;

@@ -14,7 +14,7 @@ export function booksReducer(state = initialBookState, action: BooksActions.Book
             return newState;
         case BooksActions.GET_BOOK_DETAILS:
             newState = Object.assign({}, state);
-            newState.selectedBook = getBookDetails(state.bookList, action.payload);
+            newState.selectedBook = getBookDetails(state.bookList, action.payload)!;
             return newState;
         default:
             return state;

@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes, RouterStateSnapshot } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { StoreModule } from '@ngrx/store';
-import { StoreRouterConnectingModule, RouterStateSerializer, DefaultRouterStateSerializer } from '@ngrx/router-store';
+import { StoreRouterConnectingModule, RouterStateSerializer, FullRouterStateSerializer } from '@ngrx/router-store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
@@ -15,7 +15,7 @@ import { RouterEffects } from './core/router.effects';
 import { CustomRouterStateSerializer } from './core/router-state';
 
 import { AppComponent } from './app.component';
-import { appRoutes } from './app.routes';
+import { routes } from './app.routes';
 
 import { SharedModule } from './shared/shared.module';
 
@@ -37,13 +37,12 @@ import { AirportsModule } from './airports/airports.module';
     StoreModule.forRoot(appReducers, { metaReducers: appMetaReducers, runtimeChecks: { strictStateImmutability: true, strictActionImmutability: true } }),
     EffectsModule.forRoot([ RouterEffects ]),
     RouterModule.forRoot(
-      appRoutes,
+      routes,
       { useHash: true,
-        enableTracing: false,
-        relativeLinkResolution: 'corrected'
+        enableTracing: false
       }
     ),
-    StoreRouterConnectingModule.forRoot({ serializer: DefaultRouterStateSerializer }),
+    StoreRouterConnectingModule.forRoot({ serializer: FullRouterStateSerializer }),
     // Note that you must instrument after importing StoreModule (config is optional)
     StoreDevtoolsModule.instrument({
       maxAge: 25 //  Retains last 25 states

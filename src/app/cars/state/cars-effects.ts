@@ -1,9 +1,9 @@
 
 import {catchError, map, switchMap} from 'rxjs/operators';
 
-import { of as observableOf, Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 
 
@@ -17,12 +17,15 @@ export class CarsEffects {
               private carService: CarService) {
   }
 
-  getAllCarsEffects$ =  createEffect(
+  getAllCarsEffects$ = createEffect(
     () => this.actions$.pipe(
       ofType(actions.GET_ALL_CARS),
-      switchMap(() => this.carService.getCars()),
-      map(CarList => new actions.GetAllCarsSuccess(CarList)),
-      catchError(error => of(new actions.GetAllCarsError(error)))
+      switchMap(() =>
+        this.carService.getCars().pipe(
+          map(carList => new actions.GetAllCarsSuccess(carList)),
+          catchError(error => of(new actions.GetAllCarsError(error)))
+        )
+      )
     )
   );
 }

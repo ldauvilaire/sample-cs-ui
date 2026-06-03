@@ -20,7 +20,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { CdkTableModule } from '@angular/cdk/table';
 
 import { FieldsetModule } from 'primeng/fieldset';
-import { FullCalendarModule } from 'primeng/fullcalendar';
 import { MessageModule } from 'primeng/message';
 import { MessagesModule } from 'primeng/messages';
 import { PanelModule } from 'primeng/panel';
@@ -51,7 +50,6 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     CdkTableModule,
     /* PrimeNG */
     TableModule,
-    FullCalendarModule,
     FieldsetModule,
     MessageModule,
     MessagesModule,
@@ -81,7 +79,6 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     CdkTableModule,
     /* PrimeNG */
     TableModule,
-    FullCalendarModule,
     FieldsetModule,
     MessageModule,
     MessagesModule,
