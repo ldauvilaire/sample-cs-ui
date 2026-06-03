@@ -10,7 +10,7 @@ import { NGXLogger } from 'ngx-logger';
 
 import { Car, defaultCar } from './car.model';
 import { CarState } from './state/car-state';
-import * as fromCarsActions from './state/cars.actions';
+import * as CarsActions from './state/cars.actions';
 import { CarsListComponent } from './cars-list/cars-list.component';
 import { CarDetailsComponent } from './car-details/car-details.component';
 
@@ -51,7 +51,7 @@ export class CarsComponent implements OnInit, OnDestroy {
         }
       }));
 
-    this.store.dispatch(new fromCarsActions.GetAllCars());
+    this.store.dispatch(CarsActions.getAllCars());
   }
 
   ngOnDestroy() {
@@ -60,6 +60,6 @@ export class CarsComponent implements OnInit, OnDestroy {
 
   onCarSelected(event: number) {
     this.logger.info('CarsComponent:', 'onCarSelected(' + event + ')');
-    this.store.dispatch(new fromCarsActions.GetCarDetails(event));
+    this.store.dispatch(CarsActions.getCarDetails({ carId: event }));
   }
 }

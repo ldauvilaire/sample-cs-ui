@@ -9,7 +9,7 @@ import { NGXLogger } from 'ngx-logger';
 
 import { Airport } from './airport.model';
 import { AirportState } from './state/airport-state';
-import * as fromAirportsActions from './state/airports.actions';
+import { getAllAirports } from './state/airports.actions';
 import { AirportsListComponent } from './airports-list/airports-list.component';
 
 export const selectAirportState = createFeatureSelector<AirportState>('airports');
@@ -38,7 +38,7 @@ export class AirportsComponent implements OnInit, OnDestroy {
         this.logger.info('AirportsComponent:', 'Received a list of', airportList.length, 'airport from the store ...');
       }));
 
-    this.store.dispatch(new fromAirportsActions.GetAllAirports());
+    this.store.dispatch(getAllAirports());
   }
 
   ngOnDestroy() {

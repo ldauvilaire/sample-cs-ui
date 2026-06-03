@@ -1,14 +1,10 @@
-
 import { catchError, map, switchMap } from 'rxjs/operators';
-
 import { of } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
-
-
 import { AirportService } from '../airport.service';
-import * as fromAirportsActions from './airports.actions';
+import * as AirportsActions from './airports.actions';
 
 @Injectable()
 export class AirportsEffects {
@@ -17,13 +13,13 @@ export class AirportsEffects {
               private airportService: AirportService) {
   }
 
-  getAllAirportsEffects$ = createEffect(
-    () => this.actions$.pipe(
-      ofType(fromAirportsActions.GET_ALL_AIRPORTS),
+  getAllAirports$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AirportsActions.getAllAirports),
       switchMap(() =>
         this.airportService.getAirports().pipe(
-          map(airportList => new fromAirportsActions.GetAllAirportsSuccess(airportList)),
-          catchError(error => of(new fromAirportsActions.GetAllAirportsError(error)))
+          map(airports => AirportsActions.getAllAirportsSuccess({ airports })),
+          catchError(error => of(AirportsActions.getAllAirportsError({ error })))
         )
       )
     )

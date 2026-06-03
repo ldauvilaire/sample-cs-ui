@@ -1,26 +1,19 @@
-import * as BooksActions from './books.actions';
+import { createReducer, on } from '@ngrx/store';
+
 import { Book, defaultBook } from '../book.model';
-
 import { BookState, initialBookState } from './book-state';
+import * as BooksActions from './books.actions';
 
-export function booksReducer(state = initialBookState, action: BooksActions.BooksActions): BookState {
-    let newState: BookState;
-    switch (action.type) {
-        case BooksActions.GET_ALL_BOOKS_SUCCESS:
-            newState = Object.assign({}, state);
-            newState.bookList = action.payload;
-            newState.isBookListLoaded = true;
-            newState.selectedBook = defaultBook;
-            return newState;
-        case BooksActions.GET_BOOK_DETAILS:
-            newState = Object.assign({}, state);
-            newState.selectedBook = getBookDetails(state.bookList, action.payload)!;
-            return newState;
-        default:
-            return state;
-    }
-}
-
-function getBookDetails(bookList: Book[], bookId: number) {
-    return bookList.find(book => book.id === bookId);
-}
+export const booksReducer = createReducer(
+  initialBookState,
+  on(BooksActions.getAllBooksSuccess, (state, { books }): BookState => ({
+    ...state,
+    bookList: books,
+    isBookListLoaded: true,
+    selectedBook: defaultBook,
+  })),
+  on(BooksActions.getBookDetails, (state, { bookId }): BookState => ({
+    ...state,
+    selectedBook: state.bookList.find((b: Book) => b.id === bookId) ?? defaultBook,
+  }))
+);

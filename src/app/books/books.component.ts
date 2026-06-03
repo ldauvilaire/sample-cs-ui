@@ -10,7 +10,7 @@ import { NGXLogger } from 'ngx-logger';
 
 import { Book, defaultBook } from './book.model';
 import { BookState } from './state/book-state';
-import * as fromBooksActions from './state/books.actions';
+import * as BooksActions from './state/books.actions';
 import { BooksListComponent } from './books-list/books-list.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
 
@@ -50,7 +50,7 @@ export class BooksComponent implements OnInit, OnDestroy {
         }
       }));
 
-    this.store.dispatch(new fromBooksActions.GetAllBooks());
+    this.store.dispatch(BooksActions.getAllBooks());
   }
 
   ngOnDestroy() {
@@ -59,6 +59,6 @@ export class BooksComponent implements OnInit, OnDestroy {
 
   onBookSelected(event: number) {
     this.logger.info('BooksComponent:', 'onBookSelected(', event, ')');
-    this.store.dispatch(new fromBooksActions.GetBookDetails(event));
+    this.store.dispatch(BooksActions.getBookDetails({ bookId: event }));
   }
 }
