@@ -1,9 +1,12 @@
 import { Component, OnInit, OnDestroy, AfterViewInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
-import { DataSource, CollectionViewer } from '@angular/cdk/collections';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatRadioChange } from '@angular/material/radio';
-import { MatTableDataSource } from '@angular/material/table';
-import { Observable ,  Subscription } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
+import { MatRadioModule, MatRadioChange } from '@angular/material/radio';
+import { MatTableModule, MatTableDataSource } from '@angular/material/table';
+import { Observable, Subscription } from 'rxjs';
 
 import { NGXLogger } from 'ngx-logger';
 
@@ -11,32 +14,31 @@ import { Book } from '../book.model';
 
 @Component({
   selector: 'app-books-list',
+  standalone: true,
+  imports: [CommonModule, FormsModule, MatCardModule, MatIconModule, MatPaginatorModule, MatRadioModule, MatTableModule],
   templateUrl: './books-list.component.html',
   styleUrls: ['./books-list.component.css']
 })
 export class BooksListComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  @Input() books$: Observable<Book[]>;
+  @Input() books$!: Observable<Book[]>;
   @Output() bookSelect = new EventEmitter();
-  selectedBookId: number;
+  selectedBookId!: number;
 
-  booksSubscription: Subscription;
+  booksSubscription!: Subscription;
 
-  // DataTable component
-  displayedColumns = [ 'selection', 'id', 'name', 'author', 'detail', 'price', 'image' ];
+  displayedColumns = ['selection', 'id', 'name', 'author', 'detail', 'price', 'image'];
   dataSource: MatTableDataSource<Book>;
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
   constructor(private logger: NGXLogger) {
     this.logger.info('BooksListComponent:', 'constructor()');
-
     this.dataSource = new MatTableDataSource();
     this.dataSource.paginator = this.paginator;
   }
 
   ngOnInit() {
     this.logger.info('BooksListComponent:', 'ngOnInit()');
-
     this.booksSubscription = this.books$.subscribe((data: Book[]) => {
       this.logger.info('BooksListComponent:', 'Received a list of ', data.length, ' books.');
       this.dataSource.data = data;

@@ -1,8 +1,11 @@
 <p-panel>
-  <p-header style="display: flex">
-    <i class="material-icons">directions_car</i><span style="margin-top: auto; margin-bottom: auto">Cars</span>
-  </p-header>
-  <p-table [value]="cars$ | async"
+  <ng-template #header>
+    <div style="display: flex">
+      <i class="material-icons">directions_car</i>
+      <span style="margin-top: auto; margin-bottom: auto">Cars</span>
+    </div>
+  </ng-template>
+  <p-table [value]="(cars$ | async) ?? []"
            [rows]="2"
            [paginator]="true"
            [rowsPerPageOptions]="[2,3,4,5]">
@@ -40,4 +43,3 @@
     </ng-template>
   </p-table>
 </p-panel>
-

@@ -1,5 +1,9 @@
 import { Component, OnInit, OnDestroy, Input, AfterViewInit } from '@angular/core';
-import { Observable ,  Subscription } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { NgxDatatableModule, SortType } from '@swimlane/ngx-datatable';
+import { Observable, Subscription } from 'rxjs';
 
 import { NGXLogger } from 'ngx-logger';
 
@@ -7,12 +11,16 @@ import { Airport } from '../airport.model';
 
 @Component({
   selector: 'app-airports-list',
+  standalone: true,
+  imports: [CommonModule, MatCardModule, MatIconModule, NgxDatatableModule],
   templateUrl: './airports-list.component.html',
   styleUrls: ['./airports-list.component.css']
 })
 export class AirportsListComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  @Input() airports$: Observable<Airport[]>;
+  @Input() airports$!: Observable<Airport[]>;
+
+  sortType = SortType.single;
 
   columns = [
     { name: 'ID', maxWidth: 60 },
@@ -29,7 +37,7 @@ export class AirportsListComponent implements OnInit, OnDestroy, AfterViewInit {
     { name: 'TZ' }
   ];
 
-  airportsSubscription: Subscription;
+  airportsSubscription!: Subscription;
 
   constructor(private logger: NGXLogger) {
     this.logger.info('AirportsListComponent:', 'constructor()');
@@ -37,7 +45,6 @@ export class AirportsListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit() {
     this.logger.info('AirportsListComponent:', 'ngOnInit()');
-
     this.airportsSubscription = this.airports$.subscribe((data: Airport[]) => {
       this.logger.info('AiportsListComponent:', 'Received a list of ', data.length, ' airports.');
     });

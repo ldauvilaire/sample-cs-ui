@@ -7,5 +7,5 @@
 </app-cars-list>
 <p></p>
 <app-car-details
-  [selectedCarDetails]="carDetails$ | async">
+  [selectedCarDetails]="(carDetails$ | async)!">
 </app-car-details>

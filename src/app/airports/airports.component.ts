@@ -1,27 +1,30 @@
-
-import {tap} from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { NGXLogger } from 'ngx-logger';
 
-import { Airport, defaultAirport } from './airport.model';
+import { Airport } from './airport.model';
 import { AirportState } from './state/airport-state';
 import * as fromAirportsActions from './state/airports.actions';
+import { AirportsListComponent } from './airports-list/airports-list.component';
 
 export const selectAirportState = createFeatureSelector<AirportState>('airports');
 export const selectAirportList = createSelector(selectAirportState, (state: AirportState) => state.airportList);
 
 @Component({
   selector: 'app-airports',
+  standalone: true,
+  imports: [CommonModule, AirportsListComponent],
   templateUrl: './airports.component.html',
   styleUrls: ['./airports.component.css']
 })
 export class AirportsComponent implements OnInit, OnDestroy {
 
-  airports$: Observable<Airport[]>;
+  airports$!: Observable<Airport[]>;
 
   constructor(private store: Store<AirportState>, private logger: NGXLogger) {
     this.logger.info('AirportsComponent:', 'constructor()');
@@ -31,11 +34,9 @@ export class AirportsComponent implements OnInit, OnDestroy {
     this.logger.info('AirportsComponent:', 'ngOnInit()');
 
     this.airports$ = this.store.select<Airport[]>(selectAirportList).pipe(
-        tap((airportList: Airport[]) => {
-          this.logger.info(
-            'AirportsComponent:',
-            'Received a list of', airportList.length, 'airport from the store ...');
-        }));
+      tap((airportList: Airport[]) => {
+        this.logger.info('AirportsComponent:', 'Received a list of', airportList.length, 'airport from the store ...');
+      }));
 
     this.store.dispatch(new fromAirportsActions.GetAllAirports());
   }
