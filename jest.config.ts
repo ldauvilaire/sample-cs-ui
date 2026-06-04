@@ -4,7 +4,7 @@ const config: Config = {
   preset: 'jest-preset-angular',
   setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
   coverageDirectory: 'coverage/sample-cs-ui',
-  coverageReporters: ['html', 'text-summary', 'lcovonly'],
+  coverageReporters: ['html', 'text', 'lcovonly'],
   coverageThreshold: {
     global: {
       statements: 85,
