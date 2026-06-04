@@ -6,9 +6,9 @@ A sample Angular application demonstrating how to integrate a modern Angular sta
 
 | Layer | Technology |
 |---|---|
-| Framework | [Angular 18](https://angular.dev) (standalone components) |
-| State management | [NgRx 18](https://ngrx.io) — Store, Effects, Router Store, Devtools |
-| UI components | [Angular Material 18](https://material.angular.io) + [PrimeNG 18](https://primeng.org) |
+| Framework | [Angular 21](https://angular.dev) (standalone components) |
+| State management | [NgRx 21](https://ngrx.io) — Store, Effects, Router Store, Devtools |
+| UI components | [Angular Material 21](https://material.angular.io) + [PrimeNG 21](https://primeng.org) |
 | Data grid | [@swimlane/ngx-datatable 20](https://swimlane.github.io/ngx-datatable/) |
 | Logging | [ngx-logger 5](https://github.com/dbfannin/ngx-logger) |
 | Node.js | 24.x |
@@ -36,7 +36,7 @@ The app has four pages, each demonstrating a different UI approach backed by the
 | **Home** | Angular Material | Landing page with a Material card |
 | **Books** | Angular Material | Paginated table (`mat-table`) with row selection via radio buttons |
 | **Cars** | PrimeNG | Paginated table (`p-table`) and detail form (`p-panel`, `pInputText`) |
-| **Airports** | ngx-datatable | High-performance data grid with sortable columns (8 107 rows) |
+| **Airports** | ngx-datatable | High-performance data grid with sortable columns and expandable row detail (8 107 rows) |
 
 Navigation is handled through the NgRx router store: toolbar buttons dispatch `[Router] Go` actions rather than calling the Angular router directly.
 
@@ -104,7 +104,7 @@ There is no real backend. The services fetch JSON fixture files directly from `s
 
 ## PrimeNG theming
 
-PrimeNG 18 uses a programmatic theme system. The theme is configured in `src/main.ts` via `providePrimeNG()` with the `Aura` preset from `@primeng/themes`. To switch theme, replace `Aura` with another preset (`Lara`, `Nora`, `Material`) from the same package.
+PrimeNG 21 uses a programmatic theme system. The theme is configured in `src/main.ts` via `providePrimeNG()` with the `Aura` preset from `@primeng/themes`. To switch theme, replace `Aura` with another preset (`Lara`, `Nora`, `Material`) from the same package.
 
 ## Running tests
 

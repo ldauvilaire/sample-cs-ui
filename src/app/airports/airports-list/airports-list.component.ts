@@ -1,8 +1,9 @@
-import { Component, OnInit, OnDestroy, Input, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, AfterViewInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { NgxDatatableModule, SortType } from '@swimlane/ngx-datatable';
+import { MatButtonModule } from '@angular/material/button';
+import { NgxDatatableModule, SortType, DatatableRowDetailDirective } from '@swimlane/ngx-datatable';
 import { Observable, Subscription } from 'rxjs';
 
 import { NGXLogger } from 'ngx-logger';
@@ -12,31 +13,16 @@ import { Airport } from '../airport.model';
 @Component({
   selector: 'app-airports-list',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatIconModule, NgxDatatableModule],
+  imports: [CommonModule, MatCardModule, MatIconModule, MatButtonModule, NgxDatatableModule],
   templateUrl: './airports-list.component.html',
   styleUrls: ['./airports-list.component.css']
 })
 export class AirportsListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @Input() public airports$!: Observable<Airport[]>;
+  @ViewChild(DatatableRowDetailDirective) public rowDetail!: DatatableRowDetailDirective;
 
   public sortType = SortType.single;
-
-  public columns = [
-    { name: 'ID', maxWidth: 60 },
-    { name: 'Name', cellClass: 'sample-lightblue' },
-    { name: 'City' },
-    { name: 'Country' },
-    { name: 'IATA', maxWidth: 60 },
-    { name: 'ICAO', maxWidth: 60 },
-    { name: 'Latitude', maxWidth: 100 },
-    { name: 'Longitude', maxWidth: 100 },
-    { name: 'Altitude', maxWidth: 75 },
-    { name: 'Timezone', maxWidth: 90 },
-    { name: 'DST', maxWidth: 60 },
-    { name: 'TZ' }
-  ];
-
   public airportsSubscription!: Subscription;
 
   constructor(private logger: NGXLogger) {
@@ -57,5 +43,9 @@ export class AirportsListComponent implements OnInit, OnDestroy, AfterViewInit {
   public ngOnDestroy() {
     this.logger.info('AirportsListComponent:', 'ngOnDestroy()');
     this.airportsSubscription.unsubscribe();
+  }
+
+  public toggleRowDetail(row: Airport) {
+    this.rowDetail.toggleExpandRow(row);
   }
 }

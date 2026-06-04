@@ -8,13 +8,49 @@
     <ngx-datatable
       class="material"
       [rows]="airports$ | async"
-      [columns]="columns"
       [columnMode]="'force'"
       [sortType]="sortType"
       [headerHeight]="50"
       [footerHeight]="50"
-      [rowHeight]="'auto'"
+      [rowHeight]="36"
       [limit]="8">
+
+      <ngx-datatable-row-detail [rowHeight]="100">
+        <ng-template let-row="row" ngx-datatable-row-detail-template>
+          <div class="row-detail-container">
+            <div class="row-detail-group">
+              <span class="detail-label">Latitude</span><span class="detail-value">{{ row.latitude }}</span>
+              <span class="detail-label">Longitude</span><span class="detail-value">{{ row.longitude }}</span>
+              <span class="detail-label">Altitude</span><span class="detail-value">{{ row.altitude }}</span>
+            </div>
+            <div class="row-detail-group">
+              <span class="detail-label">Timezone</span><span class="detail-value">{{ row.timezone }}</span>
+              <span class="detail-label">DST</span><span class="detail-value">{{ row.dst }}</span>
+              <span class="detail-label">TZ</span><span class="detail-value">{{ row.tz }}</span>
+            </div>
+          </div>
+        </ng-template>
+      </ngx-datatable-row-detail>
+
+      <ngx-datatable-column name="" [width]="55" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+        <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+          <button
+            class="toggle-btn"
+            mat-icon-button
+            [attr.aria-label]="(expanded ? 'Collapse' : 'Expand') + ' row ' + row.id"
+            (click)="toggleRowDetail(row)">
+            <mat-icon>{{ expanded ? 'expand_less' : 'expand_more' }}</mat-icon>
+          </button>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="ID" [maxWidth]="60"></ngx-datatable-column>
+      <ngx-datatable-column name="Name" cellClass="sample-lightblue"></ngx-datatable-column>
+      <ngx-datatable-column name="City"></ngx-datatable-column>
+      <ngx-datatable-column name="Country"></ngx-datatable-column>
+      <ngx-datatable-column name="IATA" [width]="160" [maxWidth]="160"></ngx-datatable-column>
+      <ngx-datatable-column name="ICAO" [width]="160" [maxWidth]="160"></ngx-datatable-column>
+
     </ngx-datatable>
   </mat-card-content>
 </mat-card>
