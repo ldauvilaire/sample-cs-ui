@@ -7,10 +7,10 @@ const config: Config = {
   coverageReporters: ['html', 'text-summary', 'lcovonly'],
   coverageThreshold: {
     global: {
-      statements: 70,
-      branches: 70,
-      functions: 70,
-      lines: 70,
+      statements: 85,
+      branches: 45,
+      functions: 75,
+      lines: 85,
     },
   },
 };
