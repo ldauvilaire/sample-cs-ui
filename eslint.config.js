@@ -62,7 +62,7 @@ module.exports = [
     files: ['**/*.spec.ts'],
     languageOptions: {
       globals: {
-        ...globals.jasmine,
+        ...globals.jest,
       },
     },
   },

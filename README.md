@@ -77,10 +77,13 @@ The app runs at `http://localhost:4200`.
 | `npm start` | Dev server on port 4200 |
 | `npm run build` | Production build into `dist/` |
 | `npm run build:prod` | Alias for production build |
-| `npm test` | Unit tests via Karma + Jasmine (watch mode) |
-| `npm run test:ci` | Unit tests with coverage, headless Chrome, single run |
+| `npm test` | Unit tests via Jest (watch mode) |
+| `npm run test:ci` | Unit tests with coverage, single run |
+| `npm run test:coverage` | Alias for `test:ci` |
 | `npm run lint` | ESLint over `src/**/*.ts` and `src/**/*.html` |
 | `npm run lint:fix` | ESLint with auto-fix |
+| `npm run package` | Create `sample-cs-ui.tar.gz` from the production build |
+| `npm run all` | lint → build → test:coverage → package |
 
 ## State management
 
@@ -109,8 +112,8 @@ PrimeNG 21 uses a programmatic theme system. The theme is configured in `src/mai
 ## Running tests
 
 ```bash
-npm test          # interactive, browser opens automatically
-npm run test:ci   # headless, outputs coverage to coverage/
+npm test              # interactive watch mode
+npm run test:coverage # single run with coverage report in coverage/
 ```
 
-Tests use Karma with ChromeHeadless. Mock data shared across tests lives in `src/app/testing/mockdata.ts`.
+Tests use **Jest** (Node-based, no browser required). Mock data shared across tests lives in `src/app/testing/mockdata.ts`. Coverage is enforced at 70% for statements, branches, functions, and lines.

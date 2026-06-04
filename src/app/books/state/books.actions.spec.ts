@@ -3,24 +3,22 @@ import { mockBooks } from '../../testing/mockdata';
 
 describe('The Books actions', () => {
 
-  fit('should return action with type:GET_ALL_BOOKS when getBooks is called', () => {
-    const actual = new fromBookActions.GetAllBooks();
-    expect(actual.type).toBe(fromBookActions.GET_ALL_BOOKS);
+  it('should return action with type [Books] Get All when getAllBooks is called', () => {
+    const actual = fromBookActions.getAllBooks();
+    expect(actual.type).toBe('[Books] Get All');
   });
 
-  fit('should return action with type:GET_ALL_BOOKS_SUCCESS and payload:BooksList ' +
-                ' when getBooksSuccess is called', () => {
-
-    const actual = new fromBookActions.GetAllBooksSuccess(mockBooks);
-    expect(actual.type).toBe(fromBookActions.GET_ALL_BOOKS_SUCCESS);
-    expect(actual.payload).toBe(mockBooks);
+  it('should return action with type [Books] Get All Success and books payload ' +
+      'when getAllBooksSuccess is called', () => {
+    const actual = fromBookActions.getAllBooksSuccess({ books: mockBooks });
+    expect(actual.type).toBe('[Books] Get All Success');
+    expect(actual.books).toBe(mockBooks);
   });
 
-  fit('should return action with type:GET_BOOK_DETAILS and payload: bookId ' +
-           ' when getBookDetails is called', () => {
-
-    const actual = new fromBookActions.GetBookDetails(mockBooks[0].id);
-    expect(actual.type).toBe(fromBookActions.GET_BOOK_DETAILS);
-    expect(actual.payload).toBe(mockBooks[0].id);
+  it('should return action with type [Books] Get Details and bookId payload ' +
+      'when getBookDetails is called', () => {
+    const actual = fromBookActions.getBookDetails({ bookId: mockBooks[0].id });
+    expect(actual.type).toBe('[Books] Get Details');
+    expect(actual.bookId).toBe(mockBooks[0].id);
   });
 });

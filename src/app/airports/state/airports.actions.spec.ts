@@ -3,16 +3,15 @@ import { mockAirports } from '../../testing/mockdata';
 
 describe('The Airports actions', () => {
 
-  fit('should return action with type:GET_ALL_AIRPORTS when getAirports is called', () => {
-    const actual = new fromAirportActions.GetAllAirports();
-    expect(actual.type).toBe(fromAirportActions.GET_ALL_AIRPORTS);
+  it('should return action with type [Airports] Get All when getAllAirports is called', () => {
+    const actual = fromAirportActions.getAllAirports();
+    expect(actual.type).toBe('[Airports] Get All');
   });
 
-  fit('should return action with type:GET_ALL_AIRPORTS_SUCCESS and payload:AirportsList ' +
-                ' when getAirportsSuccess is called', () => {
-
-    const actual = new fromAirportActions.GetAllAirportsSuccess(mockAirports);
-    expect(actual.type).toBe(fromAirportActions.GET_ALL_AIRPORTS_SUCCESS);
-    expect(actual.payload).toBe(mockAirports);
+  it('should return action with type [Airports] Get All Success and airports payload ' +
+      'when getAllAirportsSuccess is called', () => {
+    const actual = fromAirportActions.getAllAirportsSuccess({ airports: mockAirports });
+    expect(actual.type).toBe('[Airports] Get All Success');
+    expect(actual.airports).toBe(mockAirports);
   });
 });
