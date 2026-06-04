@@ -16,10 +16,14 @@ import { Car } from '../car.model';
 })
 export class CarDetailsComponent implements OnInit {
 
-  car!: Car;
+  public car!: Car;
+
+  constructor(private logger: NGXLogger) {
+    this.logger.info('CarDetailsComponent:', 'constructor()');
+  }
 
   @Input()
-  set selectedCarDetails(value: Car) {
+  public set selectedCarDetails(value: Car) {
     if (value.id === -1) {
       this.logger.info('CarDetailsComponent:', 'selectedCarDetails()', 'Received a empty car details');
     } else {
@@ -28,11 +32,7 @@ export class CarDetailsComponent implements OnInit {
     this.car = <Car>value;
   }
 
-  constructor(private logger: NGXLogger) {
-    this.logger.info('CarDetailsComponent:', 'constructor()');
-  }
-
-  ngOnInit() {
+  public ngOnInit() {
     this.logger.info('CarDetailsComponent:', 'ngOnInit()');
   }
 }

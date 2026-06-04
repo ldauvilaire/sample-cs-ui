@@ -9,11 +9,7 @@ import * as CarsActions from './cars.actions';
 @Injectable()
 export class CarsEffects {
 
-  constructor(private actions$: Actions,
-              private carService: CarService) {
-  }
-
-  getAllCars$ = createEffect(() =>
+  public getAllCars$ = createEffect(() =>
     this.actions$.pipe(
       ofType(CarsActions.getAllCars),
       switchMap(() =>
@@ -24,4 +20,8 @@ export class CarsEffects {
       )
     )
   );
+
+  constructor(private actions$: Actions,
+              private carService: CarService) {
+  }
 }

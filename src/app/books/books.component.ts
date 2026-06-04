@@ -27,13 +27,13 @@ export const selectSelectedBook = createSelector(selectBookState, (state: BookSt
 })
 export class BooksComponent implements OnInit, OnDestroy {
 
-  books$!: Observable<Book[]>;
-  bookDetails$!: Observable<Book>;
+  public books$!: Observable<Book[]>;
+  public bookDetails$!: Observable<Book>;
 
   constructor(private store: Store<BookState>, private logger: NGXLogger) {
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.logger.info('BooksComponent:', 'ngOnInit()', '...');
 
     this.books$ = this.store.select<Book[]>(selectBookList).pipe(
@@ -53,11 +53,11 @@ export class BooksComponent implements OnInit, OnDestroy {
     this.store.dispatch(BooksActions.getAllBooks());
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy() {
     this.logger.info('BooksComponent:', 'ngOnDestroy()', '...');
   }
 
-  onBookSelected(event: number) {
+  public onBookSelected(event: number) {
     this.logger.info('BooksComponent:', 'onBookSelected(', event, ')');
     this.store.dispatch(BooksActions.getBookDetails({ bookId: event }));
   }

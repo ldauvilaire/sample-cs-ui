@@ -18,10 +18,14 @@ import { Book } from '../book.model';
 })
 export class BookDetailsComponent implements OnInit {
 
-  book!: Book;
+  public book!: Book;
+
+  constructor(private logger: NGXLogger) {
+    this.logger.info('BookDetailsComponent:', 'constructor()');
+  }
 
   @Input()
-  set selectedBookDetails(value: Book) {
+  public set selectedBookDetails(value: Book) {
     if (value.id === -1) {
       this.logger.info('BookDetailsComponent:', 'selectedBookDetails()', 'Received a empty book details');
     } else {
@@ -30,11 +34,7 @@ export class BookDetailsComponent implements OnInit {
     this.book = <Book>value;
   }
 
-  constructor(private logger: NGXLogger) {
-    this.logger.info('BookDetailsComponent:', 'constructor()');
-  }
-
-  ngOnInit() {
+  public ngOnInit() {
     this.logger.info('BookDetailsComponent:', 'ngOnInit()');
   }
 }

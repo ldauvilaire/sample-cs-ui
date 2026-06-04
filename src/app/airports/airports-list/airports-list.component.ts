@@ -18,11 +18,11 @@ import { Airport } from '../airport.model';
 })
 export class AirportsListComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  @Input() airports$!: Observable<Airport[]>;
+  @Input() public airports$!: Observable<Airport[]>;
 
-  sortType = SortType.single;
+  public sortType = SortType.single;
 
-  columns = [
+  public columns = [
     { name: 'ID', maxWidth: 60 },
     { name: 'Name', cellClass: 'sample-lightblue' },
     { name: 'City' },
@@ -37,24 +37,24 @@ export class AirportsListComponent implements OnInit, OnDestroy, AfterViewInit {
     { name: 'TZ' }
   ];
 
-  airportsSubscription!: Subscription;
+  public airportsSubscription!: Subscription;
 
   constructor(private logger: NGXLogger) {
     this.logger.info('AirportsListComponent:', 'constructor()');
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.logger.info('AirportsListComponent:', 'ngOnInit()');
     this.airportsSubscription = this.airports$.subscribe((data: Airport[]) => {
       this.logger.info('AiportsListComponent:', 'Received a list of ', data.length, ' airports.');
     });
   }
 
-  ngAfterViewInit() {
+  public ngAfterViewInit() {
     this.logger.info('AirportsListComponent:', 'ngAfterViewInit()');
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy() {
     this.logger.info('AirportsListComponent:', 'ngOnDestroy()');
     this.airportsSubscription.unsubscribe();
   }

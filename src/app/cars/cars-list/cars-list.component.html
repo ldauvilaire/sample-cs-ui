@@ -37,7 +37,7 @@
           <a href="{{car.wiki}}">Wiki</a>
         </td>
         <td>
-          <img src="/assets/{{car.image}}" style="height: 40px; width: auto">
+          <img [attr.alt]="car.model + ' image'" src="/assets/{{car.image}}" style="height: 40px; width: auto">
         </td>
       </tr>
     </ng-template>

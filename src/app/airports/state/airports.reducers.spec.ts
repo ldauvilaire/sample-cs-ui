@@ -1,14 +1,10 @@
-import { Action } from '@ngrx/store';
-
 import { mockAirports } from '../../testing/mockdata';
-
-import { defaultAirport } from '../airport.model';
 
 import { AirportState } from './airport-state';
 import * as fromAirportsReducers from './airports.reducers';
 import * as fromAirportsActions from './airports.actions';
 
-let state: AirportState;
+let state: AirportState;
 
 describe('The Airports reducer', () => {
 

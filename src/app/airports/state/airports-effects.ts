@@ -9,11 +9,7 @@ import * as AirportsActions from './airports.actions';
 @Injectable()
 export class AirportsEffects {
 
-  constructor(private actions$: Actions,
-              private airportService: AirportService) {
-  }
-
-  getAllAirports$ = createEffect(() =>
+  public getAllAirports$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AirportsActions.getAllAirports),
       switchMap(() =>
@@ -24,4 +20,8 @@ export class AirportsEffects {
       )
     )
   );
+
+  constructor(private actions$: Actions,
+              private airportService: AirportService) {
+  }
 }

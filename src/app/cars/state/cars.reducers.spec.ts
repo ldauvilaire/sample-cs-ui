@@ -1,5 +1,3 @@
-import { Action } from '@ngrx/store';
-
 import { mockCars } from '../../testing/mockdata';
 
 import { defaultCar } from '../car.model';
@@ -8,7 +6,7 @@ import { CarState } from './car-state';
 import * as fromCarsReducers from './cars.reducers';
 import * as fromCarsActions from './cars.actions';
 
-let state: CarState;
+let state: CarState;
 
 describe('The Cars reducer', () => {
 
@@ -21,7 +19,7 @@ describe('The Cars reducer', () => {
   });
 
   fit('should set CarList to empty array and selectedCar to default when ' +
-                'CarsActions.GET_ALL_CARS is called', () => {
+      'CarsActions.GET_ALL_CARS is called', () => {
 
     const actual = fromCarsReducers.carsReducer(state, new fromCarsActions.GetAllCars());
     expect(actual.carList.length).toBe(0);
@@ -31,13 +29,13 @@ describe('The Cars reducer', () => {
   });
 
   fit('should set CarList when ' +
-            'CarsActions.GetAllCarsSuccess is called', () => {
+      'CarsActions.GetAllCarsSuccess is called', () => {
     const actual = fromCarsReducers.carsReducer(state, new fromCarsActions.GetAllCarsSuccess(mockCars));
     expect(actual.carList).toBe(mockCars);
   });
 
   fit('should set the selectedCar when ' +
-                'CarsActions.GET_CAR_DETAILS is called with CarId', () => {
+      'CarsActions.GET_CAR_DETAILS is called with CarId', () => {
 
     state.carList = mockCars;
     const actual = fromCarsReducers.carsReducer(state, new fromCarsActions.GetCarDetails(mockCars[0].id));

@@ -1,4 +1,4 @@
-import { Airport, defaultAirport } from '../airport.model';
+import { Airport } from '../airport.model';
 
 export interface AirportState {
   airportList: Airport[];

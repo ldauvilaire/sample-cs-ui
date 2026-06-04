@@ -17,7 +17,7 @@ export class BookService {
   constructor(private http: HttpClient, private logger: NGXLogger) {
   }
 
-  getBooks(): Observable<Book[]> {
+  public getBooks(): Observable<Book[]> {
     const booksServiceUrl = '/assets/data/books.json';
     const headers = new HttpHeaders();
 

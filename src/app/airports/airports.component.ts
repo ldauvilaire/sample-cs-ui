@@ -24,13 +24,13 @@ export const selectAirportList = createSelector(selectAirportState, (state: Airp
 })
 export class AirportsComponent implements OnInit, OnDestroy {
 
-  airports$!: Observable<Airport[]>;
+  public airports$!: Observable<Airport[]>;
 
   constructor(private store: Store<AirportState>, private logger: NGXLogger) {
     this.logger.info('AirportsComponent:', 'constructor()');
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.logger.info('AirportsComponent:', 'ngOnInit()');
 
     this.airports$ = this.store.select<Airport[]>(selectAirportList).pipe(
@@ -41,7 +41,7 @@ export class AirportsComponent implements OnInit, OnDestroy {
     this.store.dispatch(getAllAirports());
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy() {
     this.logger.info('AirportsComponent:', 'ngOnDestroy()');
   }
 }
