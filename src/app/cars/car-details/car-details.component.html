@@ -1,4 +1,5 @@
-<div class="rootContainer" *ngIf="car.id !== -1">
+@if (car.id !== -1) {
+<div class="rootContainer">
   <p-panel>
     <ng-template #header>
       <div style="display: flex">
@@ -8,19 +9,20 @@
     </ng-template>
     <form>
       <div style="display: grid; grid-template-columns: 150px 1fr; gap: 8px 16px; align-items: center; margin: 10px 0">
-        <label>ID :</label>
-        <input pInputText type="text" placeholder="ID" readOnly="true" [value]="car.id" style="width: 50px">
-        <label>Model :</label>
-        <input pInputText type="text" placeholder="Model" readOnly="true" [value]="car.model" style="width: 150px">
-        <label>Manufacturer :</label>
-        <input pInputText type="text" placeholder="Manufacturer" readOnly="true" [value]="car.manufacturer" style="width: 200px">
-        <label>Price :</label>
-        <input pInputText type="text" placeholder="Price" readOnly="true" [value]="car.price" style="width: 100px">
-        <label>Wiki :</label>
-        <a href="{{car.wiki}}">Wiki</a>
-        <label>Image :</label>
-        <img src="/assets/{{car.image}}" style="max-height: 120px; width: auto">
+        <label for="carId">ID :</label>
+        <input id="carId" pInputText type="text" placeholder="ID" readOnly="true" [value]="car.id" style="width: 50px">
+        <label for="carModel">Model :</label>
+        <input id="carModel" pInputText type="text" placeholder="Model" readOnly="true" [value]="car.model" style="width: 150px">
+        <label for="carManufacturer">Manufacturer :</label>
+        <input id="carManufacturer" pInputText type="text" placeholder="Manufacturer" readOnly="true" [value]="car.manufacturer" style="width: 200px">
+        <label for="carPrice">Price :</label>
+        <input id="carPrice" pInputText type="text" placeholder="Price" readOnly="true" [value]="car.price" style="width: 100px">
+        <label for="carWiki">Wiki :</label>
+        <a id="carWiki" href="{{car.wiki}}">Wiki</a>
+        <span>Image :</span>
+        <img [attr.alt]="car.model + ' image'" src="/assets/{{car.image}}" style="max-height: 120px; width: auto">
       </div>
     </form>
   </p-panel>
 </div>
+}

@@ -1,4 +1,5 @@
-<div class="rootContainer" *ngIf="book.id !== -1">
+@if (book.id !== -1) {
+<div class="rootContainer">
   <mat-card>
     <mat-card-header>
       <mat-card-title style="display: flex"><mat-icon>book</mat-icon><span style="margin: auto">Book Details</span></mat-card-title>
@@ -27,3 +28,4 @@
     </mat-card-content>
   </mat-card>
 </div>
+}

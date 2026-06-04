@@ -17,7 +17,7 @@ export class AirportService {
   constructor(private http: HttpClient, private logger: NGXLogger) {
   }
 
-  getAirports(): Observable<Airport[]> {
+  public getAirports(): Observable<Airport[]> {
     const airportsServiceUrl = '/assets/data/airports.json';
     const headers = new HttpHeaders();
 

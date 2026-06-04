@@ -21,15 +21,13 @@ import { Book } from '../book.model';
 })
 export class BooksListComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  @Input() books$!: Observable<Book[]>;
-  @Output() bookSelect = new EventEmitter();
-  selectedBookId!: number;
-
-  booksSubscription!: Subscription;
-
-  displayedColumns = ['selection', 'id', 'name', 'author', 'detail', 'price', 'image'];
-  dataSource: MatTableDataSource<Book>;
-  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
+  @Input() public books$!: Observable<Book[]>;
+  @Output() public bookSelect = new EventEmitter();
+  @ViewChild(MatPaginator, { static: true }) public paginator!: MatPaginator;
+  public selectedBookId!: number;
+  public booksSubscription!: Subscription;
+  public displayedColumns = ['selection', 'id', 'name', 'author', 'detail', 'price', 'image'];
+  public dataSource: MatTableDataSource<Book>;
 
   constructor(private logger: NGXLogger) {
     this.logger.info('BooksListComponent:', 'constructor()');
@@ -37,7 +35,7 @@ export class BooksListComponent implements OnInit, OnDestroy, AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.logger.info('BooksListComponent:', 'ngOnInit()');
     this.booksSubscription = this.books$.subscribe((data: Book[]) => {
       this.logger.info('BooksListComponent:', 'Received a list of ', data.length, ' books.');
@@ -45,17 +43,17 @@ export class BooksListComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
-  ngAfterViewInit() {
+  public ngAfterViewInit() {
     this.logger.info('BooksListComponent:', 'ngAfterViewInit()');
     this.dataSource.paginator = this.paginator;
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy() {
     this.logger.info('BooksListComponent:', 'ngOnDestroy()');
     this.booksSubscription.unsubscribe();
   }
 
-  onBookSelected(event: MatRadioChange) {
+  public onBookSelected(_event: MatRadioChange) {
     this.logger.info('BooksListComponent:', 'onBookSelected()', 'selectedBookId:', this.selectedBookId);
     this.bookSelect.emit(Number(this.selectedBookId));
   }

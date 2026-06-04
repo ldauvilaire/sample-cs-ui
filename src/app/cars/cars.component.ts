@@ -27,14 +27,14 @@ export const selectSelectedCar = createSelector(selectCarState, (state: CarState
 })
 export class CarsComponent implements OnInit, OnDestroy {
 
-  cars$!: Observable<Car[]>;
-  carDetails$!: Observable<Car>;
+  public cars$!: Observable<Car[]>;
+  public carDetails$!: Observable<Car>;
 
   constructor(private store: Store<CarState>, private logger: NGXLogger) {
     this.logger.info('CarsComponent:', 'constructor()');
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.logger.info('CarsComponent:', 'ngOnInit()');
 
     this.cars$ = this.store.select<Car[]>(selectCarList).pipe(
@@ -54,11 +54,11 @@ export class CarsComponent implements OnInit, OnDestroy {
     this.store.dispatch(CarsActions.getAllCars());
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy() {
     this.logger.info('CarsComponent:', 'ngOnDestroy()');
   }
 
-  onCarSelected(event: number) {
+  public onCarSelected(event: number) {
     this.logger.info('CarsComponent:', 'onCarSelected(' + event + ')');
     this.store.dispatch(CarsActions.getCarDetails({ carId: event }));
   }

@@ -19,33 +19,33 @@ import { Car } from '../car.model';
 })
 export class CarsListComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  @Input() cars$!: Observable<Car[]>;
-  @Output() carSelect = new EventEmitter();
-  selectedCarId!: number;
+  @Input() public cars$!: Observable<Car[]>;
+  @Output() public carSelect = new EventEmitter();
+  public selectedCarId!: number;
 
-  carsSubscription!: Subscription;
+  public carsSubscription!: Subscription;
 
   constructor(private logger: NGXLogger) {
     this.logger.info('CarsListComponent:', 'constructor()');
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.logger.info('CarsListComponent:', 'ngOnInit()');
     this.carsSubscription = this.cars$.subscribe((data: Car[]) => {
       this.logger.info('CarsListComponent:', 'Received a list of ', data.length, ' cars.');
     });
   }
 
-  ngAfterViewInit() {
+  public ngAfterViewInit() {
     this.logger.info('CarsListComponent:', 'ngAfterViewInit()');
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy() {
     this.logger.info('CarsListComponent:', 'ngOnDestroy()');
     this.carsSubscription.unsubscribe();
   }
 
-  onCarSelected(event: any) {
+  public onCarSelected(_event: unknown) {
     this.logger.info('CarsListComponent:', 'onCarSelected()', 'selectedCarId:', this.selectedCarId);
     this.carSelect.emit(Number(this.selectedCarId));
   }

@@ -1,14 +1,10 @@
-import { Action } from '@ngrx/store';
-
 import { mockAirports } from '../../testing/mockdata';
-
-import { defaultAirport } from '../airport.model';
 
 import { AirportState } from './airport-state';
 import * as fromAirportsReducers from './airports.reducers';
 import * as fromAirportsActions from './airports.actions';
 
-let state: AirportState;
+let state: AirportState;
 
 describe('The Airports reducer', () => {
 
@@ -19,16 +15,13 @@ describe('The Airports reducer', () => {
     };
   });
 
-  fit('should set AirportList to empty array when ' +
-      'AirportsActions.GET_ALL_AIRPORTS is called', () => {
-
-    const actual = fromAirportsReducers.airportsReducer(state, new fromAirportsActions.GetAllAirports());
+  it('should set AirportList to empty array when getAllAirports is called', () => {
+    const actual = fromAirportsReducers.airportsReducer(state, fromAirportsActions.getAllAirports());
     expect(actual.airportList.length).toBe(0);
   });
 
-  fit('should set AirportList when ' +
-      'AirportsActions.GetAllAirportsSuccess is called', () => {
-    const actual = fromAirportsReducers.airportsReducer(state, new fromAirportsActions.GetAllAirportsSuccess(mockAirports));
+  it('should set AirportList when getAllAirportsSuccess is called', () => {
+    const actual = fromAirportsReducers.airportsReducer(state, fromAirportsActions.getAllAirportsSuccess({ airports: mockAirports }));
     expect(actual.airportList).toBe(mockAirports);
   });
 });

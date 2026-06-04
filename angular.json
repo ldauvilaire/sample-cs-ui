@@ -22,7 +22,12 @@
             "inlineStyleLanguage": "css",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "assets",
+                "ignore": ["screenshots/**"]
+              }
             ],
             "styles": [
               "src/styles.css",
@@ -78,29 +83,9 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular-devkit/build-angular:jest",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
-            "tsConfig": "tsconfig.spec.json",
-            "inlineStyleLanguage": "css",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.css",
-              "src/assets/iconfont/material-icons.css",
-              "node_modules/font-awesome/css/font-awesome.min.css",
-              "node_modules/primeicons/primeicons.css",
-              "node_modules/@swimlane/ngx-datatable/index.css",
-              "node_modules/@swimlane/ngx-datatable/themes/material.css",
-              "node_modules/@swimlane/ngx-datatable/assets/icons.css"
-            ],
-            "scripts": [],
-            "karmaConfig": "karma.conf.js"
+            "tsConfig": "tsconfig.spec.json"
           }
         },
         "lint": {
