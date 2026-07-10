@@ -8,10 +8,10 @@
     "build": "ng build",
     "build:prod": "ng build --configuration production",
     "test": "jest",
-    "test:ci": "jest --coverage --forceExit",
+    "test:ci": "jest --coverage",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test:coverage": "jest --coverage --forceExit",
+    "test:coverage": "jest --coverage",
     "package": "tar -czf sample-cs-ui.tar.gz -C dist/sample-cs-ui/browser .",
     "all": "npm run lint && npm run build && npm run test:coverage && npm run package"
   },
